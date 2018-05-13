@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  <!-- 去除一堆注释 -->
+  	<commentGenerator>
+  		<property name="suppressAllComments" value="true"/>
+  	</commentGenerator>
+  <!-- 配置数据库连接信息 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/db_gp"
+        userId="root"
+        password="sasa">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+	<!-- 指定javaBean的生成位置 -->
+    <javaModelGenerator targetPackage="com.dwg.gp.bean" targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+	
+	<!-- 指定sql映射文件生成的位置 -->
+    <sqlMapGenerator targetPackage="mapper"  targetProject=".\src\main\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!-- 指定dao接口生成的位置 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.dwg.gp.dao"  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+	
+	<!-- 指定哪个表的生成策略 -->
+    <table tableName="deliver" domainObjectName="Deliver" ></table>
+    <table tableName="department" domainObjectName="Department"></table>
+
+    <table tableName="dispatch" domainObjectName="Dispatch" ></table>
+    <table tableName="dispatcher" domainObjectName="Dispatcher"></table>
+
+    <table tableName="employee" domainObjectName="Employee" ></table>
+    <table tableName="goods" domainObjectName="Goods"></table>
+
+    <table tableName="goodstype" domainObjectName="Goodstype" ></table>
+    <table tableName="manager" domainObjectName="Manager"></table>
+
+    <table tableName="merchandise" domainObjectName="Merchandise" ></table>
+    <table tableName="package" domainObjectName="Package"></table>
+
+    <table tableName="point" domainObjectName="Point" ></table>
+    <table tableName="truck" domainObjectName="Truck"></table>
+
+  </context>
+</generatorConfiguration>

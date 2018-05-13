@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dwg.gp.dao.DispatchMapper">
+  <resultMap id="BaseResultMap" type="com.dwg.gp.bean.Dispatch">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dispatcher_id" jdbcType="INTEGER" property="dispatcherId" />
+    <result column="deliver_id" jdbcType="INTEGER" property="deliverId" />
+    <result column="truck_id" jdbcType="INTEGER" property="truckId" />
+    <result column="merchandise_id" jdbcType="INTEGER" property="merchandiseId" />
+    <result column="create_time" jdbcType="TIME" property="createTime" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date_should" jdbcType="DATE" property="endDateShould" />
+    <result column="end_date_real" jdbcType="DATE" property="endDateReal" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, dispatcher_id, deliver_id, truck_id, merchandise_id, create_time, start_date, 
+    end_date_should, end_date_real
+  </sql>
+  <select id="selectByExample" parameterType="com.dwg.gp.bean.DispatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dispatch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dispatch
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dispatch
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dwg.gp.bean.DispatchExample">
+    delete from dispatch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dwg.gp.bean.Dispatch">
+    insert into dispatch (id, dispatcher_id, deliver_id, 
+      truck_id, merchandise_id, create_time, 
+      start_date, end_date_should, end_date_real
+      )
+    values (#{id,jdbcType=INTEGER}, #{dispatcherId,jdbcType=INTEGER}, #{deliverId,jdbcType=INTEGER}, 
+      #{truckId,jdbcType=INTEGER}, #{merchandiseId,jdbcType=INTEGER}, #{createTime,jdbcType=TIME}, 
+      #{startDate,jdbcType=DATE}, #{endDateShould,jdbcType=DATE}, #{endDateReal,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dwg.gp.bean.Dispatch">
+    insert into dispatch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dispatcherId != null">
+        dispatcher_id,
+      </if>
+      <if test="deliverId != null">
+        deliver_id,
+      </if>
+      <if test="truckId != null">
+        truck_id,
+      </if>
+      <if test="merchandiseId != null">
+        merchandise_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDateShould != null">
+        end_date_should,
+      </if>
+      <if test="endDateReal != null">
+        end_date_real,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dispatcherId != null">
+        #{dispatcherId,jdbcType=INTEGER},
+      </if>
+      <if test="deliverId != null">
+        #{deliverId,jdbcType=INTEGER},
+      </if>
+      <if test="truckId != null">
+        #{truckId,jdbcType=INTEGER},
+      </if>
+      <if test="merchandiseId != null">
+        #{merchandiseId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIME},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDateShould != null">
+        #{endDateShould,jdbcType=DATE},
+      </if>
+      <if test="endDateReal != null">
+        #{endDateReal,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dwg.gp.bean.DispatchExample" resultType="java.lang.Long">
+    select count(*) from dispatch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dispatch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dispatcherId != null">
+        dispatcher_id = #{record.dispatcherId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliverId != null">
+        deliver_id = #{record.deliverId,jdbcType=INTEGER},
+      </if>
+      <if test="record.truckId != null">
+        truck_id = #{record.truckId,jdbcType=INTEGER},
+      </if>
+      <if test="record.merchandiseId != null">
+        merchandise_id = #{record.merchandiseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIME},
+      </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDateShould != null">
+        end_date_should = #{record.endDateShould,jdbcType=DATE},
+      </if>
+      <if test="record.endDateReal != null">
+        end_date_real = #{record.endDateReal,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dispatch
+    set id = #{record.id,jdbcType=INTEGER},
+      dispatcher_id = #{record.dispatcherId,jdbcType=INTEGER},
+      deliver_id = #{record.deliverId,jdbcType=INTEGER},
+      truck_id = #{record.truckId,jdbcType=INTEGER},
+      merchandise_id = #{record.merchandiseId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIME},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date_should = #{record.endDateShould,jdbcType=DATE},
+      end_date_real = #{record.endDateReal,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dwg.gp.bean.Dispatch">
+    update dispatch
+    <set>
+      <if test="dispatcherId != null">
+        dispatcher_id = #{dispatcherId,jdbcType=INTEGER},
+      </if>
+      <if test="deliverId != null">
+        deliver_id = #{deliverId,jdbcType=INTEGER},
+      </if>
+      <if test="truckId != null">
+        truck_id = #{truckId,jdbcType=INTEGER},
+      </if>
+      <if test="merchandiseId != null">
+        merchandise_id = #{merchandiseId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIME},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDateShould != null">
+        end_date_should = #{endDateShould,jdbcType=DATE},
+      </if>
+      <if test="endDateReal != null">
+        end_date_real = #{endDateReal,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dwg.gp.bean.Dispatch">
+    update dispatch
+    set dispatcher_id = #{dispatcherId,jdbcType=INTEGER},
+      deliver_id = #{deliverId,jdbcType=INTEGER},
+      truck_id = #{truckId,jdbcType=INTEGER},
+      merchandise_id = #{merchandiseId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIME},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date_should = #{endDateShould,jdbcType=DATE},
+      end_date_real = #{endDateReal,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

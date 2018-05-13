@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dwg.gp.dao.TruckMapper">
+  <resultMap id="BaseResultMap" type="com.dwg.gp.bean.Truck">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plate_num" jdbcType="VARCHAR" property="plateNum" />
+    <result column="deadweight" jdbcType="DOUBLE" property="deadweight" />
+    <result column="volume" jdbcType="DOUBLE" property="volume" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="last_distribution_point" jdbcType="INTEGER" property="lastDistributionPoint" />
+    <result column="used_volume" jdbcType="DOUBLE" property="usedVolume" />
+    <result column="used_weight" jdbcType="DOUBLE" property="usedWeight" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, plate_num, deadweight, volume, state, location, last_distribution_point, used_volume, 
+    used_weight
+  </sql>
+  <select id="selectByExample" parameterType="com.dwg.gp.bean.TruckExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from truck
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from truck
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from truck
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dwg.gp.bean.TruckExample">
+    delete from truck
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dwg.gp.bean.Truck">
+    insert into truck (id, plate_num, deadweight, 
+      volume, state, location, 
+      last_distribution_point, used_volume, used_weight
+      )
+    values (#{id,jdbcType=INTEGER}, #{plateNum,jdbcType=VARCHAR}, #{deadweight,jdbcType=DOUBLE}, 
+      #{volume,jdbcType=DOUBLE}, #{state,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, 
+      #{lastDistributionPoint,jdbcType=INTEGER}, #{usedVolume,jdbcType=DOUBLE}, #{usedWeight,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dwg.gp.bean.Truck">
+    insert into truck
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="plateNum != null">
+        plate_num,
+      </if>
+      <if test="deadweight != null">
+        deadweight,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="lastDistributionPoint != null">
+        last_distribution_point,
+      </if>
+      <if test="usedVolume != null">
+        used_volume,
+      </if>
+      <if test="usedWeight != null">
+        used_weight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="plateNum != null">
+        #{plateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="deadweight != null">
+        #{deadweight,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDistributionPoint != null">
+        #{lastDistributionPoint,jdbcType=INTEGER},
+      </if>
+      <if test="usedVolume != null">
+        #{usedVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="usedWeight != null">
+        #{usedWeight,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dwg.gp.bean.TruckExample" resultType="java.lang.Long">
+    select count(*) from truck
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update truck
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.plateNum != null">
+        plate_num = #{record.plateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deadweight != null">
+        deadweight = #{record.deadweight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=DOUBLE},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.location != null">
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastDistributionPoint != null">
+        last_distribution_point = #{record.lastDistributionPoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.usedVolume != null">
+        used_volume = #{record.usedVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="record.usedWeight != null">
+        used_weight = #{record.usedWeight,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update truck
+    set id = #{record.id,jdbcType=INTEGER},
+      plate_num = #{record.plateNum,jdbcType=VARCHAR},
+      deadweight = #{record.deadweight,jdbcType=DOUBLE},
+      volume = #{record.volume,jdbcType=DOUBLE},
+      state = #{record.state,jdbcType=INTEGER},
+      location = #{record.location,jdbcType=VARCHAR},
+      last_distribution_point = #{record.lastDistributionPoint,jdbcType=INTEGER},
+      used_volume = #{record.usedVolume,jdbcType=DOUBLE},
+      used_weight = #{record.usedWeight,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dwg.gp.bean.Truck">
+    update truck
+    <set>
+      <if test="plateNum != null">
+        plate_num = #{plateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="deadweight != null">
+        deadweight = #{deadweight,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDistributionPoint != null">
+        last_distribution_point = #{lastDistributionPoint,jdbcType=INTEGER},
+      </if>
+      <if test="usedVolume != null">
+        used_volume = #{usedVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="usedWeight != null">
+        used_weight = #{usedWeight,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dwg.gp.bean.Truck">
+    update truck
+    set plate_num = #{plateNum,jdbcType=VARCHAR},
+      deadweight = #{deadweight,jdbcType=DOUBLE},
+      volume = #{volume,jdbcType=DOUBLE},
+      state = #{state,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      last_distribution_point = #{lastDistributionPoint,jdbcType=INTEGER},
+      used_volume = #{usedVolume,jdbcType=DOUBLE},
+      used_weight = #{usedWeight,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
