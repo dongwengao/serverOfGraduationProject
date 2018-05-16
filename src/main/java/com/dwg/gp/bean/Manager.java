@@ -5,6 +5,16 @@ public class Manager {
 
     private Integer pointId;
 
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
+    }
+
+    private Point point;
+
     public Integer getManagerId() {
         return managerId;
     }

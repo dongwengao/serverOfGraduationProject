@@ -54,30 +54,42 @@ public class EmployeeController {
         return null;
     }
 
-    @RequestMapping(value = "/detailinfo")
-    @ResponseBody
-    public Employee getDetailInfo(@RequestParam(name="id")int id, Model model, HttpServletResponse response){
-        employee= employeeInfoService.getEmployeeById(id);
-        return employee;
-    }
+//    @RequestMapping(value = "/driverdetailinfo")
+//    @ResponseBody
+//    public Employee getDetailInfo(@RequestParam(name="id")int id, Model model, HttpServletResponse response){
+//        employee= employeeInfoService.getEmployeeForDriver(id);
+//        return employee;
+//    }
 
-    @RequestMapping(value="/detailinfo1")
-    public String getDetailInfo(@RequestParam(name="id")int id, Model model) throws Exception {
-        employee= employeeInfoService.getEmployeeById(id);
+    @RequestMapping(value="/driverdetailinfo1")
+    public String getDriverDetailInfo(@RequestParam(name="id")int id, Model model) throws Exception {
+        employee= employeeInfoService.getEmployeeForDriver(id);
         model.addAttribute("employee",employee);
         model.addAttribute("img",img);
-        model.addAttribute("gender",gender);
-        if(employee.getDepartment()==1){
-            return "boss/boss_detail";
-        }else if(employee.getDepartment()==2){
             return "driver/driver_detail";
-        }else if(employee.getDepartment()==3){
-            return "manager/manager_detail";
-        }else if(employee.getDepartment()==4){
+    }
+
+    @RequestMapping(value="/managerdetailinfo1")
+    public String getMangerDetailInfo(@RequestParam(name="id")int id, Model model) throws Exception {
+        employee= employeeInfoService.getEmployeeForManager(id);
+        model.addAttribute("employee",employee);
+        model.addAttribute("img",img);
+        return "manager/manager_detail";
+    }
+
+    @RequestMapping(value="/costardetailinfo1")
+    public String getCostarDetailInfo(@RequestParam(name="id")int id, Model model) throws Exception {
+        employee= employeeInfoService.getEmployeeForCostar(id);
+        model.addAttribute("employee",employee);
+        model.addAttribute("img",img);
+        if(employee.getPrivilege()==1){
+            return "boss/boss_detail";
+        }else if(employee.getPrivilege()==2){
             return "dispatcher/dispatcher_detail";
         }
         return null;
     }
+
 
     @RequestMapping(value="/updateInfo")
     public String getDetailInfo(HttpServletRequest request,Model model,@RequestParam(name="id") int id,@RequestParam(value="img") MultipartFile image) throws Exception {
@@ -98,7 +110,7 @@ public class EmployeeController {
         map.put("image",blob);
 
         employeeInfoService.updateEmployee(map);
-        employee= employeeInfoService.getEmployeeById(id);
+        employee= employeeInfoService.getEmployeeForManager(id);
         model.addAttribute("employee",employee);
         img=Base64ImageUtil.byteArr2String(employee.getPhoto());
         model.addAttribute("img",img);

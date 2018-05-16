@@ -1,326 +1,345 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dwg.gp.dao.EmployeeMapper">
-  <resultMap id="BaseResultMap" type="com.dwg.gp.bean.Employee">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="department" jdbcType="INTEGER" property="department" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="gender" jdbcType="INTEGER" property="gender" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="privilege" jdbcType="INTEGER" property="privilege" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.dwg.gp.bean.Employee">
-    <result column="photo" jdbcType="LONGVARBINARY" property="photo" />
-  </resultMap>
-  <resultMap extends="ResultMapWithBLOBs" type="com.dwg.gp.bean.Employee" id="ResultMapWithBLOBsWithWork">
-    <association property="deliver" javaType="com.dwg.gp.bean.Deliver">
-      <result column="collection_num" property="collectionNum"/>
-      <result column="state" property="state"/>
-      <result column="last_distribution_point" property="lastDistributionPoint"/>
-      <result column="location" property="location"/>
-      <association property="point" javaType="com.dwg.gp.bean.Point">
-        <result column="pname" property="name"/>
-      </association>
-    </association>
-    <association property="manager" javaType="com.dwg.gp.bean.Manager">
-      <result column="point_id" property="pointId"/>
-    </association>
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.dwg.gp.bean.Employee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="department" jdbcType="INTEGER" property="department"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="gender" jdbcType="INTEGER" property="gender"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="privilege" jdbcType="INTEGER" property="privilege"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.dwg.gp.bean.Employee">
+        <result column="photo" jdbcType="LONGVARBINARY" property="photo"/>
+    </resultMap>
+    <resultMap extends="ResultMapWithBLOBs" type="com.dwg.gp.bean.Employee" id="ResultMapWithBLOBsWithWork">
+        <association property="deliver" javaType="com.dwg.gp.bean.Deliver">
+            <result column="collection_num" property="collectionNum"/>
+            <result column="state" property="state"/>
+            <result column="last_distribution_point" property="lastDistributionPoint"/>
+            <result column="location" property="location"/>
+            <association property="point" javaType="com.dwg.gp.bean.Point">
+                <result column="pname" property="name"/>
+            </association>
+        </association>
+        <association property="manager" javaType="com.dwg.gp.bean.Manager">
+            <association property="point" javaType="com.dwg.gp.bean.Point">
+                <result column="mpname" property="name"/>
+            </association>
+        </association>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, department, name, password, gender, phone, state, privilege
   </sql>
-  <sql id="Blob_Column_List">
+    <sql id="Blob_Column_List">
     photo
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.dwg.gp.bean.EmployeeExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from employee
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="com.dwg.gp.bean.EmployeeExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from employee
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBsWithWork">
+    <select id="selectByExampleWithBLOBs" parameterType="com.dwg.gp.bean.EmployeeExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from employee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.dwg.gp.bean.EmployeeExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from employee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByDriverPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBsWithWork">
     SELECT
     employee.id,department, employee.name, PASSWORD, gender, phone, employee.state, privilege , photo,collection_num,deliver.state,last_distribution_point,
-    deliver.location,point_id,point.name pname
-    FROM employee LEFT JOIN deliver ON employee.id=deliver_id LEFT JOIN point ON deliver.last_distribution_point = point.id  LEFT JOIN manager ON employee.id=manager_id
-    WHERE employee.id =#{id,jdbcType=INTEGER}
+    deliver.location,point.name pname
+    FROM employee JOIN deliver ON employee.id=deliver_id JOIN POINT ON deliver.last_distribution_point = point.id
+    WHERE employee.id =#{id}
   </select>
 
-  <select id="selectByNameAndPassword" parameterType="java.lang.String"  resultType="Employee">
-    select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from employee
-    where name=#{arg0} and password=#{arg1}
-  </select>
+    <select id="selectByManagerPrimaryKey" resultMap="ResultMapWithBLOBsWithWork">
+    SELECT
+    employee.id,department,employee.name,PASSWORD,gender,phone,employee.state,privilege,photo,point.id,point.name mpname
+    FROM employee JOIN manager ON employee.id=manager.manager_id JOIN POINT ON manager.point_id=point.id AND employee.id=#{id}
+</select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByCostarPrimaryKey" resultMap="ResultMapWithBLOBs">
+        select * from employee where id=#{id}
+    </select>
+
+    <select id="selectByNameAndPassword" parameterType="java.lang.String" resultType="Employee">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from employee
+        where name=#{arg0} and password=#{arg1}
+    </select>
+
+
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from employee
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dwg.gp.bean.EmployeeExample">
-    delete from employee
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.dwg.gp.bean.Employee">
+    <delete id="deleteByExample" parameterType="com.dwg.gp.bean.EmployeeExample">
+        delete from employee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.dwg.gp.bean.Employee">
     insert into employee (id, department, name, 
-      password, gender, phone, 
+      password, gender, phone,
       state, privilege, photo
       )
-    values (#{id,jdbcType=INTEGER}, #{department,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{department,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR},
       #{state,jdbcType=INTEGER}, #{privilege,jdbcType=INTEGER}, #{photo,jdbcType=LONGVARBINARY}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.dwg.gp.bean.Employee">
-    insert into employee
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="department != null">
-        department,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="state != null">
-        state,
-      </if>
-      <if test="privilege != null">
-        privilege,
-      </if>
-      <if test="photo != null">
-        photo,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="department != null">
-        #{department,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=INTEGER},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        #{state,jdbcType=INTEGER},
-      </if>
-      <if test="privilege != null">
-        #{privilege,jdbcType=INTEGER},
-      </if>
-      <if test="photo != null">
-        #{photo,jdbcType=LONGVARBINARY},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.dwg.gp.bean.EmployeeExample" resultType="java.lang.Long">
-    select count(*) from employee
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update employee
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.department != null">
+    <insert id="insertSelective" parameterType="com.dwg.gp.bean.Employee">
+        insert into employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="department != null">
+                department,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="privilege != null">
+                privilege,
+            </if>
+            <if test="photo != null">
+                photo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="department != null">
+                #{department,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="privilege != null">
+                #{privilege,jdbcType=INTEGER},
+            </if>
+            <if test="photo != null">
+                #{photo,jdbcType=LONGVARBINARY},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.dwg.gp.bean.EmployeeExample" resultType="java.lang.Long">
+        select count(*) from employee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update employee
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.department != null">
+                department = #{record.department,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gender != null">
+                gender = #{record.gender,jdbcType=INTEGER},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.state != null">
+                state = #{record.state,jdbcType=INTEGER},
+            </if>
+            <if test="record.privilege != null">
+                privilege = #{record.privilege,jdbcType=INTEGER},
+            </if>
+            <if test="record.photo != null">
+                photo = #{record.photo,jdbcType=LONGVARBINARY},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update employee
+        set id = #{record.id,jdbcType=INTEGER},
         department = #{record.department,jdbcType=INTEGER},
-      </if>
-      <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.gender != null">
         gender = #{record.gender,jdbcType=INTEGER},
-      </if>
-      <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.state != null">
         state = #{record.state,jdbcType=INTEGER},
-      </if>
-      <if test="record.privilege != null">
         privilege = #{record.privilege,jdbcType=INTEGER},
-      </if>
-      <if test="record.photo != null">
-        photo = #{record.photo,jdbcType=LONGVARBINARY},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update employee
-    set id = #{record.id,jdbcType=INTEGER},
-      department = #{record.department,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      gender = #{record.gender,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      state = #{record.state,jdbcType=INTEGER},
-      privilege = #{record.privilege,jdbcType=INTEGER},
-      photo = #{record.photo,jdbcType=LONGVARBINARY}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update employee
-    set id = #{record.id,jdbcType=INTEGER},
-      department = #{record.department,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      gender = #{record.gender,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      state = #{record.state,jdbcType=INTEGER},
-      privilege = #{record.privilege,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dwg.gp.bean.Employee">
-    update employee
-    <set>
-      <if test="department != null">
-        department = #{department,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=INTEGER},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        state = #{state,jdbcType=INTEGER},
-      </if>
-      <if test="privilege != null">
-        privilege = #{privilege,jdbcType=INTEGER},
-      </if>
-      <if test="photo != null">
-        photo = #{photo,jdbcType=LONGVARBINARY},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dwg.gp.bean.Employee">
+        photo = #{record.photo,jdbcType=LONGVARBINARY}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update employee
+        set id = #{record.id,jdbcType=INTEGER},
+        department = #{record.department,jdbcType=INTEGER},
+        name = #{record.name,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
+        gender = #{record.gender,jdbcType=INTEGER},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        state = #{record.state,jdbcType=INTEGER},
+        privilege = #{record.privilege,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dwg.gp.bean.Employee">
+        update employee
+        <set>
+            <if test="department != null">
+                department = #{department,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="privilege != null">
+                privilege = #{privilege,jdbcType=INTEGER},
+            </if>
+            <if test="photo != null">
+                photo = #{photo,jdbcType=LONGVARBINARY},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dwg.gp.bean.Employee">
     update employee
     set department = #{department,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
@@ -332,7 +351,7 @@
       photo = #{photo,jdbcType=LONGVARBINARY}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dwg.gp.bean.Employee">
+    <update id="updateByPrimaryKey" parameterType="com.dwg.gp.bean.Employee">
     update employee
     set department = #{department,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
@@ -343,7 +362,7 @@
       privilege = #{privilege,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByMap" parameterType="java.util.Map" statementType="PREPARED">
+    <update id="updateByMap" parameterType="java.util.Map" statementType="PREPARED">
     UPDATE employee,deliver
     SET NAME=#{name} ,gender=#{gender},phone=#{phone},photo=#{image},collection_num=#{workphone}
     WHERE employee.id=deliver.`deliver_id` AND employee.id=#{id}

@@ -22,7 +22,7 @@ public interface EmployeeMapper {
 
     List<Employee> selectByExample(EmployeeExample example);
 
-    Employee selectByPrimaryKey(Integer id);
+    Employee selectByDriverPrimaryKey(Integer id);
 
     Employee selectByNameAndPassword(String name,String password);
 
@@ -39,4 +39,8 @@ public interface EmployeeMapper {
     int updateByPrimaryKey(Employee record);
 
     void updateByMap(HashMap map);
+
+    Employee selectByManagerPrimaryKey(int id);
+
+    Employee selectByCostarPrimaryKey(int id);
 }

@@ -150,7 +150,7 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a class="nav-link">
-                                    <a href="/employee/detailinfo1?id=${employee.id}" class="nav-link">
+                                    <a href="/employee/driverdetailinfo1?id=${employee.id}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>查看个人信息</p>
                                     </a>
