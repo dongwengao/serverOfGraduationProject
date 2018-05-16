@@ -16,6 +16,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 @Controller
@@ -29,7 +30,6 @@ public class EmployeeController {
     EmployeeInfoService employeeInfoService;
 
     public Employee employee;
-    public String gender;
     public String img;
 
     @RequestMapping("login")
@@ -90,32 +90,13 @@ public class EmployeeController {
         return null;
     }
 
-
-    @RequestMapping(value="/updateInfo")
-    public String getDetailInfo(HttpServletRequest request,Model model,@RequestParam(name="id") int id,@RequestParam(value="img") MultipartFile image) throws Exception {
-        String name=request.getParameter("name");
-        String gender=request.getParameter("gender");
-        String phone=request.getParameter("phone");
-        String workphone=request.getParameter("workphone");
-        System.out.println(image);
-        java.sql.Blob blob=null;
-        blob=new SerialBlob(image.getBytes());
-
-        HashMap<String,Object> map=new HashMap<String,Object>();
-        map.put("id",id);
-        map.put("name",name);
-        map.put("gender",gender);
-        map.put("phone",phone);
-        map.put("workphone",workphone);
-        map.put("image",blob);
-
-        employeeInfoService.updateEmployee(map);
-        employee= employeeInfoService.getEmployeeForManager(id);
+    @RequestMapping(value="/getallemployees")
+    public String getAllEmployees(HttpServletRequest request,Model model){
         model.addAttribute("employee",employee);
-        img=Base64ImageUtil.byteArr2String(employee.getPhoto());
         model.addAttribute("img",img);
-        System.out.println(id);
-        return "/driver/driver_detail";
+        return "boss/boss_addemployee";
     }
+
+
 
 }

@@ -7,6 +7,7 @@
   <title>AdminLTE 3 | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/bootstrap.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -70,7 +71,7 @@
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">x
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/employee/managerdetailinfo1?id=${employee.id}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>

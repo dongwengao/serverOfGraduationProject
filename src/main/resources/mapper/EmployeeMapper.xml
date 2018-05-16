@@ -29,6 +29,9 @@
                 <result column="mpname" property="name"/>
             </association>
         </association>
+        <association property="dePartment" javaType="com.dwg.gp.bean.Department">
+            <result column="dname" property="name"/>
+        </association>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -245,6 +248,10 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
+    <select id="selectAll" resultMap="ResultMapWithBLOBsWithWork">
+        SELECT employee.id,employee.id,employee.name,employee.gender,employee.state,employee.privilege,department.name
+        FROM employee JOIN department ON employee.department=department.id
+    </select>
     <update id="updateByExampleSelective" parameterType="map">
         update employee
         <set>
@@ -362,9 +369,14 @@
       privilege = #{privilege,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <update id="updateByMap" parameterType="java.util.Map" statementType="PREPARED">
+    <update id="updateByMapForDriver" parameterType="java.util.Map" statementType="PREPARED">
     UPDATE employee,deliver
     SET NAME=#{name} ,gender=#{gender},phone=#{phone},photo=#{image},collection_num=#{workphone}
     WHERE employee.id=deliver.`deliver_id` AND employee.id=#{id}
   </update>
+    <update id="updateByMapForCostar" parameterType="java.util.Map" statementType="PREPARED">
+        update employee
+        set name=#{name},gender=#{gender},phone=#{phone},photo=#{image}
+        where employee.id=#{id}
+    </update>
 </mapper>

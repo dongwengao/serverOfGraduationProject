@@ -76,8 +76,8 @@
                             <li class="nav-item">
                                 <a class="nav-link" >
                                     <a href="/employee/costardetailinfo1?id=${employee.id}" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p >查看个人信息</p>
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p >查看个人信息</p>
                                     </a>
                                 </a>
                             </li>
@@ -130,9 +130,50 @@
     <div class="content-wrapper">
         <section class="content">
 
+            <!-- 搭建显示页面 -->
+            <div class="container">
+                <!-- 标题行 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>员工列表</h1>
+                    </div>
+                </div>
+                <!-- 按钮 -->
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-8">
+                        <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
+                        <button class="btn btn-danger">删除</button>
+                    </div>
+                </div>
+                <!-- 显示表格数据 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover" id="emps_table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>empName</th>
+                                <th>gender</th>
+                                <th>phone</th>
+                                <th>deptName</th>
+                                <th>操作</th>
+                                <th></th>
+                            </tr>
+                            <thead>
+                            <tbody>
 
-
-
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 显示分页信息 -->
+                <div class="row">
+                    <!-- 分页文字信息 -->
+                    <div class="col-md-6" id="page_info_area"></div>
+                    <!-- 分页条信息 -->
+                    <div class="col-md-6" id="page_nav_area"></div>
+                </div>
+            </div>
         </section>
     </div>
 
@@ -164,8 +205,5 @@
 <script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../../dist/js/adminlte.js"></script>
-<script>
-
-</script>
 </body>
 </html>

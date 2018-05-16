@@ -31,9 +31,8 @@
                 <h4 class="modal-title" id="myModalLabel">更新信息</h4>
             </div>
 
-            ${employee.id}
             <div class="modal-body">
-                <form class="form-horizontal" action="/employee/updateInfo?id=${employee.id}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action="/updateInfo/updateDriver?id=${employee.id}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                             姓名

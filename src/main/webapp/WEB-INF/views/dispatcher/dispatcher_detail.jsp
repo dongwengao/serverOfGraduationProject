@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -20,7 +20,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini" ng-controller="ctrl">
+<body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
 
@@ -126,8 +126,7 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="fa fa-address-book"></i>
@@ -138,11 +137,9 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link">
-                                    <a href="/employee/costardetailinfo1?id=${employee.id}" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>查看个人信息</p>
-                                    </a>
+                                <a href="/employee/costardetailinfo1?id=${employee.id}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>查看个人信息</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -154,37 +151,100 @@
                         </ul>
                     </li>
 
-
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="fa fa-tasks"></i>
+                            <i class="fa fa-suitcase"></i>
                             <p>
-                                员工信息
+                                货物信息
                                 <i class="right fa fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/employee/getallemployees" class="nav-link">
+                                <a href="./index.html" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>增加员工</p>
+                                    <p>查看货物信息</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/employee/getallemployees" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>开除员工</p>
+                                    <p>待调度货物信息</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
+
+
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-truck"></i>
+                            <p>
+                                卡车信息
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="./index.html" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>查看卡车信息</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>可调度卡车信息</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-user-circle-o"></i>
+                            <p>
+                                司机信息
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="./index.html" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>查看司机信息</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>可调度司机信息</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>生成调度单</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>查看调度单</p>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
     </aside>
-
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -216,10 +276,8 @@
                 </tbody>
             </table>
 
-
         </section>
     </div>
-
 
     <!-- /.content-wrapper -->
     <footer class="main-footer">

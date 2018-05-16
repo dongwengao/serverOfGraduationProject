@@ -4,6 +4,7 @@ import com.dwg.gp.bean.Employee;
 import com.dwg.gp.bean.EmployeeExample;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -38,9 +39,12 @@ public interface EmployeeMapper {
 
     int updateByPrimaryKey(Employee record);
 
-    void updateByMap(HashMap map);
+    void updateByMapForDriver(HashMap map);
+
+    void updateByMapForCostar(HashMap map);
 
     Employee selectByManagerPrimaryKey(int id);
 
     Employee selectByCostarPrimaryKey(int id);
+    LinkedList<Employee> selectAll();
 }

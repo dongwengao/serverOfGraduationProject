@@ -39,6 +39,16 @@ public class Employee {
 
     private Manager manager;
 
+    public Department getDePartment() {
+        return dePartment;
+    }
+
+    public void setDePartment(Department dePartment) {
+        this.dePartment = dePartment;
+    }
+
+    private Department dePartment;
+
     public Integer getId() {
         return id;
     }
