@@ -27,4 +27,8 @@ public interface TruckMapper {
     int updateByPrimaryKeySelective(Truck record);
 
     int updateByPrimaryKey(Truck record);
+
+    List<Truck> seleckAllTruck();
+
+    List<Truck> selectUseTruck();
 }

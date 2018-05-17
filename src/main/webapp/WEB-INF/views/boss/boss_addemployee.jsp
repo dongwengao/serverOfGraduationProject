@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html >
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,87 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini"  ng-controller="ctrl">
+<body class="hold-transition sidebar-mini" ng-controller="ctrl">
+
+
+
+<!---Modal-->
+<div class="modal fade" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">更新信息</h4>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-horizontal" action="/employee/addemployee" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            姓名
+                        </label>
+                        <div class="col-sm-10">
+                            <input type=text name="name" class="form-control"
+                                   id="empName_add_input" placeholder="empName"> <span
+                                class="help-block"> </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline"> <input type="radio"
+                                                                name="gender" id="gender1_add_input" value="1" checked="true">
+                                男
+                            </label> <label class="radio-inline"> <input type="radio"
+                                                                         name="gender" id="gender2_add_input" value="2"> 女
+                        </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            电话
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" name="phone" class="form-control" id="phone_add_input"
+                                   placeholder="电话">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            部门
+                        </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="dId">
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            照片
+                        </label>
+                        <div class="col-sm-10">
+                            <input name="img" id="img" type="file"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary" id="emp_save_btn">保存</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <div class="wrapper">
 
     <!-- Navbar -->
@@ -63,7 +143,8 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="fa fa-address-book"></i>
@@ -74,10 +155,10 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" >
+                                <a class="nav-link">
                                     <a href="/employee/costardetailinfo1?id=${employee.id}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p >查看个人信息</p>
+                                        <p>查看个人信息</p>
                                     </a>
                                 </a>
                             </li>
@@ -107,7 +188,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
+                                <a href="/employee/getallemployees" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>开除员工</p>
                                 </a>
@@ -122,27 +203,23 @@
     </aside>
 
 
-
-
-
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content">
+
 
             <!-- 搭建显示页面 -->
             <div class="container">
                 <!-- 标题行 -->
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>员工列表</h1>
+                        <h1>员工操作</h1>
                     </div>
                 </div>
                 <!-- 按钮 -->
                 <div class="row">
                     <div class="col-md-4 col-md-offset-8">
                         <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
-                        <button class="btn btn-danger">删除</button>
                     </div>
                 </div>
                 <!-- 显示表格数据 -->
@@ -152,10 +229,10 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>empName</th>
-                                <th>gender</th>
-                                <th>phone</th>
-                                <th>deptName</th>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>电话</th>
+                                <th>部门</th>
                                 <th>操作</th>
                                 <th></th>
                             </tr>
@@ -174,6 +251,7 @@
                     <div class="col-md-6" id="page_nav_area"></div>
                 </div>
             </div>
+
         </section>
     </div>
 
@@ -205,5 +283,82 @@
 <script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../../dist/js/adminlte.js"></script>
+
+<script>
+
+    var totalRecord;
+    $(function () {
+        to_page(1);
+    });
+
+    function to_page(pn) {
+        $.ajax({
+            url: "/employee/emps",
+            data: "pn=" + pn,
+            type: "get",
+            success: function (result) {
+                build_emps_table(result);
+            }
+        });
+    }
+
+    function build_emps_table(result) {
+        //清空table表格
+        $("#emps_table tbody").empty();
+        var emps = result.extend.pageInfo.list;
+        $.each(emps, function (index, item) {
+            var empIdTd = $("<td></td>").append(item.id);
+            var empNameTd = $("<td></td>").append(item.name);
+            var genderTd = $("<td></td>").append(
+                item.gender == '1' ? '男' : '女');
+            var phoneTd=$("<td></td>").append(item.phone);
+            var deptNameTd = $("<td></td>")
+                .append(item.dePartment.name);
+            var delBtn = $("<button></button>").addClass(
+                "btn btn-danger btn-sm delete_btn").append(
+                $("<span></span>").addClass(
+                    "glyphicon glyphicon-remove")).append("删除");
+            var btnTd=$("<td></td>").append(delBtn);
+            $("<tr></tr>").append(empIdTd).append(empNameTd).append(
+                genderTd).append(phoneTd).append(deptNameTd).append(
+                btnTd).appendTo("#emps_table tbody");
+        });
+    }
+
+    $('#emp_add_modal_btn').click(function () {
+        $.ajax({
+            url:"/department/list",
+            method:"GET",
+            success:function (result) {
+                $.each(result.extend.list,function(){
+                    var optionEle=$("<option></option>").append(this.name).attr("value",this.id);
+                    optionEle.appendTo("#empAddModal select");
+                });
+            }
+        });
+        $('#empAddModal').modal();
+    });
+
+    $(document).on('click',".delete_btn",function(){
+        var delName=$(this).parent("td").parent("tr").find("td:eq(1)").text();
+        var id=$(this).parent("td").parent("tr").find("td:eq(0)").text();
+        if(confirm("确认删除"+delName+"?")){
+            $.ajax({
+                url:"/employee/delemployee",
+                data:"id="+id,
+                method:"POST",
+                success:function (result) {
+                    alert("删除成功");
+                    to_page(1);
+                }
+            });
+        }
+    });
+
+
+
+</script>
+
+
 </body>
 </html>

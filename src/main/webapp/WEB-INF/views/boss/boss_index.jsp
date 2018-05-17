@@ -107,7 +107,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
+                                <a href="/employee/getallemployees" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>开除员工</p>
                                 </a>
@@ -129,9 +129,6 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content">
-
-
-
 
         </section>
     </div>

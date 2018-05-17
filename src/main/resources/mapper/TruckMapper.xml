@@ -11,6 +11,9 @@
     <result column="last_distribution_point" jdbcType="INTEGER" property="lastDistributionPoint" />
     <result column="used_volume" jdbcType="DOUBLE" property="usedVolume" />
     <result column="used_weight" jdbcType="DOUBLE" property="usedWeight" />
+    <association property="point" javaType="com.dwg.gp.bean.Point">
+      <result column="name" property="name"/>
+    </association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,6 +77,16 @@
     id, plate_num, deadweight, volume, state, location, last_distribution_point, used_volume, 
     used_weight
   </sql>
+
+  <select id="seleckAllTruck" resultMap="BaseResultMap">
+        SELECT * FROM truck,POINT WHERE truck.last_distribution_point=point.id
+  </select>
+
+  <select id="selectUseTruck" resultMap="BaseResultMap">
+        SELECT * FROM truck,POINT WHERE truck.last_distribution_point=point.id and truck.state=1
+  </select>
+
+
   <select id="selectByExample" parameterType="com.dwg.gp.bean.TruckExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

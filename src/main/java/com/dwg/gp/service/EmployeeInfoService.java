@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -34,7 +35,19 @@ public class EmployeeInfoService {
         return employeeMapper.selectByCostarPrimaryKey(id);
     }
 
-    public LinkedList<Employee> getAllEmployee(){
+    public LinkedList<Employee> getAllEmployee() {
         return employeeMapper.selectAll();
+    }
+
+    public void addEmployee(Employee employee) {
+        employeeMapper.insert(employee);
+    }
+
+    public void deleteEmployeeById(int id) {
+        employeeMapper.deleteByPrimaryKey(id);
+    }
+
+    public List<Employee> getAllDriver() {
+        return employeeMapper.selectAllDriver();
     }
 }

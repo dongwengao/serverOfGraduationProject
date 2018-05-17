@@ -47,4 +47,6 @@ public interface EmployeeMapper {
 
     Employee selectByCostarPrimaryKey(int id);
     LinkedList<Employee> selectAll();
+
+    List<Employee> selectAllDriver();
 }

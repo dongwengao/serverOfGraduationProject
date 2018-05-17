@@ -19,6 +19,16 @@ public class Truck {
 
     private Double usedWeight;
 
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
+    }
+
+    private Point point;
+
     public Integer getId() {
         return id;
     }

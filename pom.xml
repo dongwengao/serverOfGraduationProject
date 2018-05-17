@@ -100,11 +100,15 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- 引入PageHelper分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>5.0.0</version>
         </dependency>
+
+
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>

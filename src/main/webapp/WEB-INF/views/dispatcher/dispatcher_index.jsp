@@ -123,13 +123,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="/truck/truckall?id=${employee.id}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>查看卡车信息</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/truck/usetruck?id=${employee.id}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>可调度卡车信息</p>
                 </a>
@@ -148,7 +148,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="/driver/drivers?id=${employee.id}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>查看司机信息</p>
                 </a>

@@ -1,9 +1,12 @@
 package com.dwg.gp.controller;
 
 import com.dwg.gp.bean.Employee;
+import com.dwg.gp.bean.Msg;
 import com.dwg.gp.service.LoginService;
 import com.dwg.gp.service.EmployeeInfoService;
 import com.dwg.gp.utils.Base64ImageUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +20,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("employee")
+@RequestMapping("/employee")
 public class EmployeeController {
 
     @Autowired
@@ -32,7 +36,7 @@ public class EmployeeController {
     public Employee employee;
     public String img;
 
-    @RequestMapping("login")
+    @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response,Model m) throws Exception {
         String name=request.getParameter("username");
         String password=request.getParameter("password");
@@ -90,13 +94,47 @@ public class EmployeeController {
         return null;
     }
 
-    @RequestMapping(value="/getallemployees")
-    public String getAllEmployees(HttpServletRequest request,Model model){
+    @RequestMapping("/delemployee")
+    public String delemployee(@RequestParam("id")int id){
+        employeeInfoService.deleteEmployeeById(id);
+        return null;
+    }
+
+    @RequestMapping(value="getallemployees")
+    public String geAllEmployees(Model model){
         model.addAttribute("employee",employee);
         model.addAttribute("img",img);
         return "boss/boss_addemployee";
     }
 
+    @RequestMapping(value="/emps")
+    @ResponseBody
+    public Msg getAllEmployees(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model){
+        List<Employee> emps = employeeInfoService.getAllEmployee();
+        PageInfo page = new PageInfo(emps);
+        return Msg.success().add("pageInfo",page);
+    }
+
+    @RequestMapping(value="/addemployee")
+    public String addemployee(HttpServletRequest request,@RequestParam(value="img") MultipartFile image,Model model) throws IOException, SQLException {
+        model.addAttribute("employee",employee);
+        model.addAttribute("img",img);
+        String name=request.getParameter("name");
+        String gender=request.getParameter("gender");
+        String phone=request.getParameter("phone");
+        String department=request.getParameter("dId");
+        java.sql.Blob blob=null;
+        blob=new SerialBlob(image.getBytes());
+        Employee e=new Employee();
+
+        e.setName(name);
+        e.setDepartment(Integer.parseInt(department));
+        e.setGender(Integer.parseInt(gender));
+        e.setPhone(phone);
+        e.setPhoto(image.getBytes());
+        employeeInfoService.addEmployee(e);
+        return "boss/boss_addemployee";
+    }
 
 
 }

@@ -17,7 +17,7 @@
     <resultMap extends="ResultMapWithBLOBs" type="com.dwg.gp.bean.Employee" id="ResultMapWithBLOBsWithWork">
         <association property="deliver" javaType="com.dwg.gp.bean.Deliver">
             <result column="collection_num" property="collectionNum"/>
-            <result column="state" property="state"/>
+            <result column="dstate" property="state"/>
             <result column="last_distribution_point" property="lastDistributionPoint"/>
             <result column="location" property="location"/>
             <association property="point" javaType="com.dwg.gp.bean.Point">
@@ -133,11 +133,18 @@
 
     <select id="selectByDriverPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBsWithWork">
     SELECT
-    employee.id,department, employee.name, PASSWORD, gender, phone, employee.state, privilege , photo,collection_num,deliver.state,last_distribution_point,
+    employee.id,department, employee.name, PASSWORD, gender, phone, employee.state, privilege , photo,collection_num,deliver.state dstate,last_distribution_point,
     deliver.location,point.name pname
     FROM employee JOIN deliver ON employee.id=deliver_id JOIN POINT ON deliver.last_distribution_point = point.id
     WHERE employee.id =#{id}
   </select>
+
+    <select id="selectAllDriver" resultMap="ResultMapWithBLOBsWithWork">
+    SELECT
+    employee.id,department, employee.name, PASSWORD, gender, phone, employee.state , privilege , photo,collection_num,deliver.state dstate,last_distribution_point,
+    deliver.location ,point.name pname
+   FROM deliver LEFT JOIN employee ON deliver.`deliver_id`=employee.`id` JOIN POINT ON deliver.`last_distribution_point`=point.`id`
+    </select>
 
     <select id="selectByManagerPrimaryKey" resultMap="ResultMapWithBLOBsWithWork">
     SELECT
@@ -172,11 +179,11 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.dwg.gp.bean.Employee">
-    insert into employee (id, department, name, 
+    insert into employee (department, name,
       password, gender, phone,
       state, privilege, photo
       )
-    values (#{id,jdbcType=INTEGER}, #{department,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+    values ( #{department,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR},
       #{state,jdbcType=INTEGER}, #{privilege,jdbcType=INTEGER}, #{photo,jdbcType=LONGVARBINARY}
       )
@@ -248,8 +255,8 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
-    <select id="selectAll" resultMap="ResultMapWithBLOBsWithWork">
-        SELECT employee.id,employee.id,employee.name,employee.gender,employee.state,employee.privilege,department.name
+    <select id="selectAll" resultMap="ResultMapWithBLOBsWithWork" statementType="PREPARED">
+        SELECT employee.id,employee.department,employee.name,employee.gender,employee.phone,employee.state,employee.privilege,department.name dname
         FROM employee JOIN department ON employee.department=department.id
     </select>
     <update id="updateByExampleSelective" parameterType="map">
