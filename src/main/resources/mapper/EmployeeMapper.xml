@@ -165,6 +165,18 @@
         where name=#{arg0} and password=#{arg1}
     </select>
 
+    <select id="selectAlluseDriver" resultMap="ResultMapWithBLOBsWithWork">
+    SELECT
+    employee.id,department, employee.name, PASSWORD, gender, phone, employee.state , privilege , photo,collection_num,deliver.state dstate,last_distribution_point,
+    deliver.location ,point.name pname
+   FROM deliver LEFT JOIN employee ON deliver.`deliver_id`=employee.`id` JOIN POINT ON deliver.`last_distribution_point`=point.`id`
+   AND deliver.`state`=1
+    </select>
+
+
+
+
+
 
 
 

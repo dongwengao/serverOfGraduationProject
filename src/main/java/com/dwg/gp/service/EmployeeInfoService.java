@@ -50,4 +50,8 @@ public class EmployeeInfoService {
     public List<Employee> getAllDriver() {
         return employeeMapper.selectAllDriver();
     }
+
+    public List<Employee> getAlluseDriver() {
+        return employeeMapper.selectAlluseDriver();
+    }
 }

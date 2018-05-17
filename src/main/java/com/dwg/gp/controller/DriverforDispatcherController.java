@@ -33,6 +33,14 @@ public class DriverforDispatcherController {
         return "/dispatcher/dispatcher_drivers";
     }
 
+    @RequestMapping("/driversuse")
+    public String getUseDrivers(@RequestParam("id") int id,HttpServletRequest request,Model model) throws Exception {
+        Employee employee=employeeInfoService.getEmployeeForCostar(id);
+        model.addAttribute("employee",employee);
+        model.addAttribute("img",Base64ImageUtil.byteArr2String(employee.getPhoto()));
+        return "/dispatcher/dispatcher_driversuse";
+    }
+
 
     @RequestMapping("/driversjson")
     @ResponseBody
@@ -41,6 +49,18 @@ public class DriverforDispatcherController {
         List<Employee> drivers=employeeInfoService.getAllDriver();
         return Msg.success().add("drivers",drivers);
     }
+
+
+    @RequestMapping("/driversusejson")
+    @ResponseBody
+    public Msg getDriversuseJson(HttpServletRequest request){
+
+        List<Employee> drivers=employeeInfoService.getAlluseDriver();
+        return Msg.success().add("drivers",drivers);
+    }
+
+
+
 
 
 }

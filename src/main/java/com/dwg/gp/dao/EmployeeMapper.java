@@ -49,4 +49,6 @@ public interface EmployeeMapper {
     LinkedList<Employee> selectAll();
 
     List<Employee> selectAllDriver();
+
+    List<Employee> selectAlluseDriver();
 }
