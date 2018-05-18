@@ -11,6 +11,18 @@ public class Merchandise {
 
     private Integer endpoint;
 
+    @Override
+    public String toString() {
+        return "Merchandise{" +
+                "id=" + id +
+                ", volumn=" + volumn +
+                ", weight=" + weight +
+                ", startpoint=" + startpoint +
+                ", endpoint=" + endpoint +
+                ", state=" + state +
+                '}';
+    }
+
     private Integer state;
 
     public Integer getId() {

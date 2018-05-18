@@ -3,6 +3,14 @@ package com.dwg.gp.bean;
 public class Department {
     private Integer id;
 
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     private String name;
 
     public Integer getId() {

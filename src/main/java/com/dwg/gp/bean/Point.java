@@ -17,6 +17,16 @@ public class Point {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Point{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", location='" + location + '\'' +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

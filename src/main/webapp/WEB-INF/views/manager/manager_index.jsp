@@ -114,13 +114,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>进货任务</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="/manager1/addmerchandise?id=${employee.id}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>出货任务</p>
                 </a>

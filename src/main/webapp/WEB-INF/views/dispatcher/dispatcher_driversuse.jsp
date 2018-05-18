@@ -23,71 +23,6 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-
-    <!---Modal-->
-    <div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">更新信息</h4>
-                </div>
-
-                <div class="modal-body">
-                    <form class="form-horizontal" action="/updateInfo/updateCostar?id=${employee.id}" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                                姓名
-                            </label>
-                            <div class="col-sm-10">
-                                <input type="text" name="name" class="form-control" id="name_update_input"
-                                       placeholder="姓名">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">性别</label>
-                            <div class="col-sm-10">
-                                <label class="radio-inline">
-                                    <input type="radio" name="gender" id="gender1_update_input" value="1">
-                                    男
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="gender" id="gender2_update_input" value="2">
-                                    女
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">
-                                电话
-                            </label>
-                            <div class="col-sm-8">
-                                <input type="text" name="phone" class="form-control" id="phone_update_input"
-                                       placeholder="电话">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                                照片
-                            </label>
-                            <div class="col-sm-10">
-                                <input name="img" type="file"/>
-                            </div>
-                        </div>
-                        还有工作地点
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="submit" class="btn btn-primary" id="emp_save_btn">保存</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
         <!-- Left navbar links -->
@@ -140,7 +75,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/employee/managerdetailinfo1?id=${employee.id}" class="nav-link">
+                                <a href="/employee/costardetailinfo1?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>查看个人信息</p>
                                 </a>
@@ -148,52 +83,100 @@
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p id="emp_update_p">修改个人信息</p>
+                                    <p>修改个人信息</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-home"></i>
-                            <p>
-                                工作地点
-                            </p>
-                        </a>
-                    </li>
-
-
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="fa fa-tasks"></i>
+                            <i class="fa fa-suitcase"></i>
                             <p>
-                                任务清单
+                                货物信息
                                 <i class="right fa fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>查看历史信息</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="./index.html" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>进货任务</p>
+                                    <p>查看货物信息</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/manager1/addmerchandise?id=${employee.id}" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>出货任务</p>
+                                    <p>待调度货物信息</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
+
+
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-truck"></i>
+                            <p>
+                                卡车信息
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/truck/truckall?id=${employee.id}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>查看卡车信息</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/truck/usetruck?id=${employee.id}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>可调度卡车信息</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-user-circle-o"></i>
+                            <p>
+                                司机信息
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/driver/drivers?id=${employee.id}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>查看司机信息</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/driver/driversuse?id=${employee.id}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>可调度司机信息</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>生成调度单</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>查看调度单</p>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -201,43 +184,38 @@
         <!-- /.sidebar -->
     </aside>
 
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content">
-            <table class="table table-hover" id="emps_table">
-                <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>${employee.name}</th>
-                </tr>
-                <tr>
-                    <th>性别</th>
-                    <th><c:if test="${employee.gender eq '1'}">男</c:if>
-                        <c:if test="${employee.gender eq '2'}">女</c:if></th>
-                </tr>
-                <tr>
-                    <th>电话</th>
-                    <th>${employee.phone}</th>
-                </tr>
-                <tr>
-                    <th>照片</th>
-                    <th><img src="data:image/png;base64,${img}"></th>
-                </tr>
-                <tr>
-                    <th>工作地点</th>
-                    <th>${employee.manager.point.name}</th>
-                </tr>
-                <thead>
-                <tbody>
 
-                </tbody>
-            </table>
 
+            <div class="container">
+                <!-- 显示表格数据 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover" id="emps_table">
+                            <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>电话</th>
+                                <th>工作电话</th>
+                                <th>工作状态</th>
+                                <th>最近一次所在位置</th>
+                                <th>所处位置</th>
+                                <th></th>
+                            </tr>
+                            <thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
         </section>
     </div>
-
 
     <!-- /.content-wrapper -->
     <footer class="main-footer">
@@ -267,9 +245,38 @@
 <!-- AdminLTE App -->
 <script src="../../../dist/js/adminlte.js"></script>
 <script>
-    $('#emp_update_p').click(function () {
-        $('#empUpdateModal').modal({});
+    $(function () {
+        to_page(1);
     });
+
+    function to_page(pn) {
+        $.ajax({
+            url: "/driver/driversusejson",
+            type: "get",
+            success: function (result) {
+                build_driver_table(result);
+            }
+        });
+    }
+
+    function build_driver_table(result) {
+        //清空table表格
+        $("#emps_table tbody").empty();
+        var drivers = result.extend.drivers;
+        $.each(drivers, function (index, item) {
+            var name = $("<td></td>").append(item.name);
+            var gender=$("<td></td>").append(item.gender);
+            var stateTd=$("<td></td>").append('送货');
+            var phone=$("<td></td>").append(item.phone);
+            var workphone=$("<td></td>").append(item.deliver.collectionNum);
+            var lp=$("<td></td>").append(item.deliver.point.name);
+            var location=$("<td></td>").append(item.deliver.location);
+
+            $("<tr></tr>").append(name).append(gender).append(
+                phone).append(workphone).append(stateTd).append(lp).append(location).appendTo("#emps_table tbody");
+        });
+    }
+
 </script>
 </body>
 </html>

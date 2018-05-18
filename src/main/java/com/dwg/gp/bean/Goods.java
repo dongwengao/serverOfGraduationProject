@@ -7,6 +7,15 @@ public class Goods {
 
     private String name;
 
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "id=" + id +
+                ", goodstypeId1=" + goodstypeId1 +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

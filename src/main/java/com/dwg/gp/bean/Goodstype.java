@@ -9,6 +9,14 @@ public class Goodstype {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Goodstype{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

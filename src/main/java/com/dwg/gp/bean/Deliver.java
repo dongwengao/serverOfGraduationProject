@@ -21,7 +21,17 @@ public class Deliver {
 
     private Point point;
 
-
+    @Override
+    public String toString() {
+        return "Deliver{" +
+                "deliverId=" + deliverId +
+                ", collectionNum='" + collectionNum + '\'' +
+                ", state=" + state +
+                ", lastDistributionPoint=" + lastDistributionPoint +
+                ", location='" + location + '\'' +
+                ", point=" + point +
+                '}';
+    }
 
     public Integer getDeliverId() {
         return deliverId;

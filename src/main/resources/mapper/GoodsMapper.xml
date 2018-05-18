@@ -87,6 +87,11 @@
     from goods
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByTypeId" parameterType="int" resultMap="BaseResultMap">
+    SELECT * FROM goods , goodstype WHERE goods.`goodstype_id1`=goodstype.`id` AND goodstype.`id`=#{id}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from goods
     where id = #{id,jdbcType=INTEGER}

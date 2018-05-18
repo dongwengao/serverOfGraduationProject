@@ -27,4 +27,6 @@ public interface PointMapper {
     int updateByPrimaryKeySelective(Point record);
 
     int updateByPrimaryKey(Point record);
+
+    List<Point> selectAllPoint();
 }

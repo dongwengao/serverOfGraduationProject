@@ -27,4 +27,6 @@ public interface PackageMapper {
     int updateByPrimaryKeySelective(Package record);
 
     int updateByPrimaryKey(Package record);
+
+    List selectByMerchandiseId(Integer id);
 }

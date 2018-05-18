@@ -13,6 +13,15 @@ public class Manager {
         this.point = point;
     }
 
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "managerId=" + managerId +
+                ", pointId=" + pointId +
+                ", point=" + point +
+                '}';
+    }
+
     private Point point;
 
     public Integer getManagerId() {

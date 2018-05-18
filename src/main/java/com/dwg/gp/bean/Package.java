@@ -11,6 +11,27 @@ public class Package {
 
     private Integer state;
 
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
+    private Goods goods;
+
+    @Override
+    public String toString() {
+        return "Package{" +
+                "packageId=" + packageId +
+                ", merchandiseId=" + merchandiseId +
+                ", goodsId=" + goodsId +
+                ", num=" + num +
+                ", state=" + state +
+                '}';
+    }
+
     public Integer getPackageId() {
         return packageId;
     }

@@ -15,6 +15,22 @@ public class Truck {
 
     private Integer lastDistributionPoint;
 
+    @Override
+    public String toString() {
+        return "Truck{" +
+                "id=" + id +
+                ", plateNum='" + plateNum + '\'' +
+                ", deadweight=" + deadweight +
+                ", volume=" + volume +
+                ", state=" + state +
+                ", location='" + location + '\'' +
+                ", lastDistributionPoint=" + lastDistributionPoint +
+                ", usedVolume=" + usedVolume +
+                ", usedWeight=" + usedWeight +
+                ", point=" + point +
+                '}';
+    }
+
     private Double usedVolume;
 
     private Double usedWeight;

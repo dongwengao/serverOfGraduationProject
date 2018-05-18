@@ -7,6 +7,9 @@
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
     <result column="num" jdbcType="INTEGER" property="num" />
     <result column="state" jdbcType="INTEGER" property="state" />
+    <association property="goods" javaType="com.dwg.gp.bean.Goods">
+      <result column="name" property="name"/>
+    </association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -88,6 +91,13 @@
     <include refid="Base_Column_List" />
     from package
     where package_id = #{packageId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByMerchandiseId" parameterType="int" resultMap="BaseResultMap">
+    SELECT goods.`name` name ,package.`merchandise_id`,package.`num`,package.`package_id`,package.`state`
+    FROM merchandise , package,goods
+	WHERE package.`goods_id`=goods.`id`
+	AND package.`merchandise_id`=merchandise.`id`
+	AND merchandise.`id`=#{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from package

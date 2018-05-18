@@ -27,4 +27,6 @@ public interface MerchandiseMapper {
     int updateByPrimaryKeySelective(Merchandise record);
 
     int updateByPrimaryKey(Merchandise record);
+
+    int insertForId(Merchandise merchandise);
 }

@@ -5,6 +5,21 @@ import java.util.Date;
 public class Dispatch {
     private Integer id;
 
+    @Override
+    public String toString() {
+        return "Dispatch{" +
+                "id=" + id +
+                ", dispatcherId=" + dispatcherId +
+                ", deliverId=" + deliverId +
+                ", truckId=" + truckId +
+                ", merchandiseId=" + merchandiseId +
+                ", createTime=" + createTime +
+                ", startDate=" + startDate +
+                ", endDateShould=" + endDateShould +
+                ", endDateReal=" + endDateReal +
+                '}';
+    }
+
     private Integer dispatcherId;
 
     private Integer deliverId;

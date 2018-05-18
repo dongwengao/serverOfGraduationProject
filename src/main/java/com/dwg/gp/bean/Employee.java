@@ -1,11 +1,31 @@
 package com.dwg.gp.bean;
 
+import java.util.Arrays;
+
 public class Employee {
     private Integer id;
 
     private Integer department;
 
     private String name;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", department=" + department +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", gender=" + gender +
+                ", phone='" + phone + '\'' +
+                ", state=" + state +
+                ", privilege=" + privilege +
+                ", photo=" + Arrays.toString(photo) +
+                ", deliver=" + deliver +
+                ", manager=" + manager +
+                ", dePartment=" + dePartment +
+                '}';
+    }
 
     private String password;
 
