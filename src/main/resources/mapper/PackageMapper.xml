@@ -113,7 +113,7 @@
     insert into package (package_id, merchandise_id, goods_id, 
       num, state)
     values (#{packageId,jdbcType=INTEGER}, #{merchandiseId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
-      #{num,jdbcType=INTEGER}, #{state,jdbcType=INTEGER})
+      #{num,jdbcType=INTEGER}, 1)
   </insert>
   <insert id="insertSelective" parameterType="com.dwg.gp.bean.Package">
     insert into package
@@ -217,5 +217,10 @@
       num = #{num,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER}
     where package_id = #{packageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateForState" parameterType="int">
+    update package
+    set state=2
+    where package_id=#{id}
   </update>
 </mapper>

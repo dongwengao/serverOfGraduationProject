@@ -9,6 +9,25 @@
         <result column="endpoint" jdbcType="INTEGER" property="endpoint"/>
         <result column="state" jdbcType="INTEGER" property="state"/>
     </resultMap>
+
+
+    <resultMap id="BaseResultMapWithPoint" type="com.dwg.gp.bean.Merchandise" extends="BaseResultMap">
+        <association property="startpointobject" javaType="com.dwg.gp.bean.Point">
+            <result column="startname" property="name"/>
+            <result column="startid" property="id"/>
+            <result column="starttype" property="type"/>
+            <result column="startlocation" property="location"/>
+        </association>
+        <association property="endpointobject" javaType="com.dwg.gp.bean.Point">
+            <result column="endname" property="name"/>
+            <result column="endid" property="id"/>
+            <result column="endtype" property="type"/>
+            <result column="endlocation" property="location"/>
+        </association>
+    </resultMap>
+
+
+
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -92,10 +111,19 @@
         from merchandise
         where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <select id="selectAllByShoudendPointId" parameterType="int" resultMap="BaseResultMapWithPoint">
+        select merchandise.id,volumn,weight,startpoint,endpoint,state,p1.id startid,p2.id endid,p1.name startname,p2.name endname,
+        p1.type starttype,p2.type endtype,p1.location startlocation,p2.location endlocation
+        from point p1 join merchandise on p1.id=merchandise.startpoint join point p2 on merchandise.endpoint=p2.id
+        where merchandise.endpoint=#{shouldendpoint} and state=1
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from merchandise
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
     <delete id="deleteByExample" parameterType="com.dwg.gp.bean.MerchandiseExample">
         delete from merchandise
         <if test="_parameter != null">
@@ -208,6 +236,20 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
+    <update id="updateByMerchandise" parameterType="com.dwg.gp.bean.Merchandise">
+         update merchandise set volumn=#{volumn},
+         weight=#{weight},
+         startpoint=#{startpoint},
+         endpoint=#{endpoint}
+         where id=#{id}
+    </update>
+
+    <update id="updateByMerchandiseForState" parameterType="int">
+        update merchandise set state=2
+        where merchandise.id=#{id}
+    </update>
+
+
     <update id="updateByPrimaryKeySelective" parameterType="com.dwg.gp.bean.Merchandise">
         update merchandise
         <set>

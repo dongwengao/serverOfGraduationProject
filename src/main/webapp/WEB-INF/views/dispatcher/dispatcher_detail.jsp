@@ -161,7 +161,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
+                                <a href="/merchandise/getallmerchandise?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>查看货物信息</p>
                                 </a>

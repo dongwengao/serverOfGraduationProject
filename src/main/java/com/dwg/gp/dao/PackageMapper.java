@@ -29,4 +29,6 @@ public interface PackageMapper {
     int updateByPrimaryKey(Package record);
 
     List selectByMerchandiseId(Integer id);
+
+    void updateForState(int id);
 }

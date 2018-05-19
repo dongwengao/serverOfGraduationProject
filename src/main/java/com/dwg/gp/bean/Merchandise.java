@@ -11,6 +11,26 @@ public class Merchandise {
 
     private Integer endpoint;
 
+    public Point getStartpointobject() {
+        return startpointobject;
+    }
+
+    public void setStartpointobject(Point startpointobject) {
+        this.startpointobject = startpointobject;
+    }
+
+    private Point startpointobject;
+
+    public Point getEndpointobject() {
+        return endpointobject;
+    }
+
+    public void setEndpointobject(Point endpointobject) {
+        this.endpointobject = endpointobject;
+    }
+
+    private Point endpointobject;
+
     @Override
     public String toString() {
         return "Merchandise{" +

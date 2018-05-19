@@ -29,4 +29,10 @@ public interface MerchandiseMapper {
     int updateByPrimaryKey(Merchandise record);
 
     int insertForId(Merchandise merchandise);
+
+    void updateByMerchandise(Merchandise merchandise);
+
+    List<Merchandise> selectAllByShoudendPointId(int shouldendpoint);
+
+    void updateByMerchandiseForState(int id);
 }

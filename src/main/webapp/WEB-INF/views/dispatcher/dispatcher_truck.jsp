@@ -99,7 +99,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
+                                <a href="/merchandise/getallmerchandise?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>查看货物信息</p>
                                 </a>
@@ -198,6 +198,7 @@
                             <tr>
                                 <th>车牌号</th>
                                 <th>载重量</th>
+                                <th>状态</th>
                                 <th>体积</th>
                                 <th>所处位置</th>
                                 <th>可用重量</th>

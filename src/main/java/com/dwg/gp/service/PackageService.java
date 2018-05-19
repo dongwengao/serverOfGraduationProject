@@ -21,4 +21,8 @@ public class PackageService {
     public List getpacksByMid(Integer id) {
         return packageMapper.selectByMerchandiseId(id);
     }
+
+    public void surePackArrived(int id) {
+        packageMapper.updateForState(id);
+    }
 }

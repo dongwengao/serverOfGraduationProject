@@ -21,51 +21,37 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
+
+
 <!---Modal-->
 <div class="modal fade" id="packAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">添加一个包</h4>
+                <h4 class="modal-title" id="myModalLabel">显示货单里所有包</h4>
             </div>
 
             <div class="modal-body">
-                <form class="form-horizontal" id="pack_form">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">
-                            商品类别
-                        </label>
-                        <div class="col-sm-10">
-                            <select class="form-control" name="goodsType" id="goodsType" default="1">
 
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">
-                            商品名称
-                        </label>
-                        <div class="col-sm-10">
-                            <select class="form-control" name="goodsId" id="goods">
 
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">
-                            数量
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="number" name="num" class="form-control" id="num">
-                        </div>
-                    </div>
+                <table class="table table-hover" id="pack_table">
+                    <thead>
+                    <tr>
+                        <th>包裹编号</th>
+                        <th>名称</th>
+                        <th>数量</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    <thead>
+                    <tbody id="packList">
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" id="goods_save_btn">保存</button>
-                    </div>
+                    </tbody>
 
-                </form>
+                </table>
+
+
+
             </div>
 
         </div>
@@ -74,59 +60,6 @@
 
 
 
-
-
-
-
-
-<!---Modal-->
-<div class="modal fade" id="merchandiseAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">设置货单</h4>
-            </div>
-
-            <div class="modal-body">
-                <form class="form-horizontal" id="merchandise_form">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">
-                            重量
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="number" name="weight" class="form-control" id="weight">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">
-                            体积
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="number" name="volumn" class="form-control" id="volumn">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">
-                            终点
-                        </label>
-                        <div class="col-sm-10">
-                            <select class="form-control" name="endpoint" id="endpoint">
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" id="merchandise_save">保存</button>
-                    </div>
-
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 <div class="wrapper">
 
@@ -248,41 +181,29 @@
     <div class="content-wrapper">
         <section class="content">
 
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <button type="button" class="btn btn-info btn-large col-md-4" id="btn">生成一个货单</button>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4" align="center"><span id="span_mid"></span></div>
-                    <div class="col-md-4"></div>
-                </div>
-            </div>
-
-
             <div class="container box-body table-responsive no-padding">
                 <!-- Main hero unit for a primary marketing message or call to action -->
                 <div class="leaderboard">
-                    <h1></h1>
+                    <h1>待处理货单</h1>
                     <p></p>
-                    <p>
-                        <a id="addpack_a" class="btn btn-sm btn-large" href="#">添加一个包+</a></p>
                 </div>
                 <!-- Example row of columns -->
                 <div class="">
                     <!-- 显示表格数据 -->
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table table-hover" id="emps_table">
+                            <table class="table table-hover" id="merchandise_table">
                                 <thead>
                                 <tr>
-                                    <th>商品名</th>
-                                    <th>数量</th>
-                                    <th></th>
+                                    <th>货单号</th>
+                                    <th>体积</th>
+                                    <th>重量</th>
+                                    <th>来源</th>
+                                    <th>来源性质</th>
+                                    <th>操作</th>
                                 </tr>
                                 <thead>
-                                <tbody id="packsList">
+                                <tbody id="merchandiseList">
 
                                 </tbody>
 
@@ -291,13 +212,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-
-                <div class="col-md-5"></div>
-                <div class="col-md-5"></div>
-                <button type="button" class="btn btn-success col-md-1" id="btn_save">保存货单</button>
-            </div>
-
         </section>
     </div>
 
@@ -330,131 +244,95 @@
 <!-- AdminLTE App -->
 <script src="../../../dist/js/adminlte.js"></script>
 <script>
-    var merchandiseId;
-    var goodsTypeId;
-    var currentPointId;
+
     $(function () {
-        $.ajax({
-            url:"/manager1/getpointId",
-            data:"id="+${employee.id},
-            success:function (result) {
-                currentPointId=result.extend.pointId;
-            }
-        });
-    });
-    $("#btn").click(function () {
-
-        $('#packsList').empty();
-        $.ajax({
-            url: "/manager1/addmerchandiseforid",
-            success: function (result) {
-                $('#span_mid').empty();
-                alert("生成一个货单" + result.extend.mid);
-                $('#span_mid').append("货单号:" + result.extend.mid);
-                merchandiseId = result.extend.mid;
-                showPacksList();
-            }
-        });
-
+        getinput();
     });
 
-    $("#addpack_a").click(function () {
-
+    function getinput(){
+        $('#merchandise_table tbody').empty();
         $.ajax({
-            url: "/goodsType/goodsTypelist",
+            url: "/manager1/getallinput",
+            data: "id=" +${employee.id},
             success: function (result) {
-                $('#goodsType').empty();
-                $.each(result.extend.goodsTypes, function () {
-                    var optionEle = $("<option></option>").append(this.name).attr("value", this.id);
-                    optionEle.appendTo("#goodsType");
-                });
-
-            }
-        });
-
-        getGoods(1);
-
-        $('#packAddModal').modal();
-    });
-
-    function getGoods(goodsTypeId) {
-        $.ajax({
-            url: "/goods/goodsListByTypeId",
-            data: "id=" + goodsTypeId,
-            success: function (result) {
-
-                $('#goods').empty();
-                $.each(result.extend.goods, function () {
-                    var optionEle = $("<option></option>").append(this.name).attr("value", this.id);
-                    optionEle.appendTo("#goods");
-                });
-            }
-        });
-    }
-
-    function getPoints(){
-        $.ajax({
-            url:"/point/getpoints",
-            success:function (result) {
-                $('#endpoint').empty();
-                $.each(result.extend.points, function () {
-                    var optionEle = $("<option></option>").append(this.name).attr("value", this.id);
-                    optionEle.appendTo("#endpoint");
-                });
-            }
-        });
-    }
-
-    $('#goodsType').bind("change", function () {
-        goodsTypeId = $(this).val();
-        getGoods(goodsTypeId);
-
-    });
-
-    $('#goods_save_btn').click(function () {
-        $.ajax({
-            url: "/package/packageSave",
-            data: $.param({'merchandiseId': merchandiseId}) + '&' + $('#pack_form').serialize(),
-            success: function (result) {
-                alert(result);
-                showPacksList();
-                $('#packAddModal').modal('hide');
-            }
-        });
-
-    })
-
-    function showPacksList() {
-        $('#packsList').empty();
-        $.ajax({
-            url: "/package/packs",
-            data: "merchandiseId=" + merchandiseId,
-            success: function (result) {
-                $.each(result.extend.packs, function () {
-                    var nameTd = $("<td></td>").append(this.goods.name);
+                $.each(result.extend.merchandises, function () {
+                    var idTd = $("<td></td>").append(this.id);
+                    var weightTd = $("<td></td>").append(this.weight);
+                    var volumnTd = $("<td></td>").append(this.volumn);
+                    var startTd = $("<td></td>").append(this.startpointobject.name);
+                    var startType = $("<td></td>").append(this.startpoint.type == '1' ? '超市' : this.startpoint.type == '2' ? '仓库' : '工厂');
+                    var editBtn = $("<button></button>").addClass(
+                        "btn btn-primary btn-sm showdetail").append("详情");
+                    var delBtn = $("<button></button>").addClass(
+                        "btn btn-info btn-sm arrivedsure").append("确认到达");
+                    var btnTd = $("<td></td>").append(editBtn).append(" ").append(
+                        delBtn);
                     var num = $("<td></td>").append(this.num);
-                    $("<tr></tr>").append(nameTd).append(num).appendTo("#emps_table tbody");
+                    $("<tr></tr>").append(idTd).append(weightTd).append(volumnTd).append(startTd).append(startType).append(btnTd).appendTo("#merchandise_table tbody");
                 });
             }
         });
     }
 
-    $('#btn_save').click(function () {
-        getPoints();
-        $('#merchandiseAdd').modal();
+    var merchandiseId;
+    $(document).on('click',".showdetail",function(){
+            $('#packAddModal').modal();
+            merchandiseId=$(this).parent("td").parent("tr").find("td:eq(0)").text();
+            getMerchandiseDetail(merchandiseId);
     });
 
-
-    $('#merchandise_save').click(function(){
-
+    function getMerchandiseDetail(merchandise){
+        $("#pack_table tbody").empty();
         $.ajax({
-            url:"/manager1/updatetheMerchandise",
-            data:$.param({'id': merchandiseId,'startpoint':currentPointId}) + '&' + $('#merchandise_form').serialize(),
+            url:"/manager1/getpacksbymid",
+            data:"mid="+merchandiseId,
             success:function (result) {
-                alert("success");
+                $('#pack_table tbody').empty();
+                $.each(result.extend.packs, function () {
+                    var idTd = $("<td></td>").append(this.packageId);
+                    var nameTd = $("<td></td>").append(this.goods.name);
+                    var numTd = $("<td></td>").append(this.num);
+                    var stateTd=$("<td></td>").append(this.state==1?'未到达':'到达');
+                    var sureBtn = $("<button></button>").addClass(
+                        "btn btn-info btn-sm arrivesurepack").append("确认到达");
+                    var btnTd = $("<td></td>").append(" ").append(
+                        sureBtn);
+                    var num = $("<td></td>").append(this.num);
+                    $("<tr></tr>").append(idTd).append(nameTd).append(numTd).append(stateTd).append(btnTd).appendTo("#pack_table tbody");
+                });
+
+
             }
-        })
+        });
+    }
+
+    $(document).on('click',".arrivedsure",function(){
+        var merchandiseId=$(this).parent("td").parent("tr").find("td:eq(0)").text();
+            $.ajax({
+                url:"/manager1/suremerchandise",
+                data:"id="+merchandiseId,
+                success:function (result) {
+                    alert("确认成功");
+                    getinput();
+                }
+            });
+
     });
+
+
+    $(document).on('click',".arrivesurepack",function(){
+        var packId=$(this).parent("td").parent("tr").find("td:eq(0)").text();
+        $.ajax({
+            url:"/manager1/suremerchandisepack",
+            data:"id="+packId,
+            success:function (result) {
+                alert("确认成功");
+                getMerchandiseDetail();
+            }
+        });
+
+    });
+
 
 
 </script>

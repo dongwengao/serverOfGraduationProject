@@ -181,7 +181,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
+                                <a href="/manager1/examInputMerchandise?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>进货任务</p>
                                 </a>

@@ -99,7 +99,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
+                                <a href="/merchandise/getallmerchandise?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>查看货物信息</p>
                                 </a>
@@ -196,6 +196,7 @@
                         <table class="table table-hover" id="emps_table">
                             <thead>
                             <tr>
+                                <th>司机编号</th>
                                 <th>姓名</th>
                                 <th>性别</th>
                                 <th>电话</th>
@@ -264,6 +265,7 @@
         $("#emps_table tbody").empty();
         var drivers = result.extend.drivers;
         $.each(drivers, function (index, item) {
+            var driverId=$("<td></td>").append(item.id);
             var name = $("<td></td>").append(item.name);
             var gender=$("<td></td>").append(item.gender);
             var stateTd=$("<td></td>").append(item.deliver.state == '1' ? '送货' :'没送货');
@@ -272,7 +274,7 @@
             var lp=$("<td></td>").append(item.deliver.point.name);
             var location=$("<td></td>").append(item.deliver.location);
 
-            $("<tr></tr>").append(name).append(gender).append(
+            $("<tr></tr>").append(driverId).append(name).append(gender).append(
                 phone).append(workphone).append(stateTd).append(lp).append(location).appendTo("#emps_table tbody");
         });
     }
