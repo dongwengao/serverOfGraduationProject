@@ -28,4 +28,12 @@ public class MerchandiseService {
     public void sureArrive(int id) {
         merchandiseMapper.updateByMerchandiseForState(id);
     }
+
+    public List<Merchandise> getAllMerchandise() {
+        return merchandiseMapper.selectAll();
+    }
+
+    public List<Merchandise> getNeedDispatchMerchandise() {
+        return merchandiseMapper.selectAllNeedDispatche();
+    }
 }

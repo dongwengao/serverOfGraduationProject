@@ -19,8 +19,12 @@
     <link rel="stylesheet" href="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=fRnaUbQzjKctONFGiLqsuaQBArEg0EuG"></script>
 </head>
 <body class="hold-transition sidebar-mini">
+
+
 <div class="wrapper">
 
     <!-- Navbar -->
@@ -189,27 +193,33 @@
         <section class="content">
 
 
-            <div class="container">
-                <!-- 显示表格数据 -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-hover" id="emps_table">
-                            <thead>
-                            <tr>
-                                <th>姓名</th>
-                                <th>性别</th>
-                                <th>电话</th>
-                                <th>工作电话</th>
-                                <th>工作状态</th>
-                                <th>最近一次所在位置</th>
-                                <th>所处位置</th>
-                                <th></th>
-                            </tr>
-                            <thead>
-                            <tbody>
+            <div class="container box-body table-responsive no-padding">
+                <!-- Main hero unit for a primary marketing message or call to action -->
+                <div class="leaderboard">
+                    <h1>所有货物信息</h1>
+                </div>
+                <!-- Example row of columns -->
+                <div class="">
+                    <!-- 显示表格数据 -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover" id="emps_table">
+                                <thead>
+                                <tr>
+                                    <th>货物编号</th>
+                                    <th>体积</th>
+                                    <th>重量</th>
+                                    <th>发货地点</th>
+                                    <th>接收地点</th>
+                                    <th>状态</th>
+                                </tr>
+                                <thead>
+                                <tbody id="merchandiseList">
 
-                            </tbody>
-                        </table>
+                                </tbody>
+
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,51 +243,39 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
 <!-- jQuery -->
 <script src="../../../plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<!-- Bootstrap 4 -->
+<%--<!-- Bootstrap 4 -->--%>
 <script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
+<%--<!-- Bootstrap WYSIHTML5 -->--%>
 <script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- AdminLTE App -->
+<%--<!-- AdminLTE App -->--%>
 <script src="../../../dist/js/adminlte.js"></script>
 <script>
-    $(function () {
-        to_page(1);
-    });
 
-    function to_page(pn) {
+    $(function () {
         $.ajax({
-            url: "/driver/driversusejson",
-            type: "get",
+            url: "/merchandise/getdispatchmerchandiseforjson",
             success: function (result) {
-                build_driver_table(result);
+                var merchandises=result.extend.merchandise;
+                $.each(merchandises, function (index, item) {
+                    var midTd=$("<td></td>").append(item.id);
+                    var volumnTd = $("<td></td>").append(item.volumn);
+                    var weightTd=$("<td></td>").append(item.weight);
+                    var startTd=$("<td></td>").append(item.startpointobject.name);
+                    var endTd=$("<td></td>").append(item.endpointobject.name);
+                    var stateId=$("<td></td>").append(item.state == '1' ? '没调度' :'在路上');
+                    $("<tr></tr>").append(midTd).append(volumnTd).append(weightTd).append(startTd).append(endTd).append(
+                        stateId).appendTo("#emps_table tbody");
+                });
             }
         });
-    }
-
-    function build_driver_table(result) {
-        //清空table表格
-        $("#emps_table tbody").empty();
-        var drivers = result.extend.drivers;
-        $.each(drivers, function (index, item) {
-            var driverId=$("<td></td>").append(item.id);
-            var name = $("<td></td>").append(item.name);
-            var gender=$("<td></td>").append(item.gender);
-            var stateTd=$("<td></td>").append('送货');
-            var phone=$("<td></td>").append(item.phone);
-            var workphone=$("<td></td>").append(item.deliver.collectionNum);
-            var lp=$("<td></td>").append(item.deliver.point.name);
-            var location=$("<td></td>").append(item.deliver.location);
-
-            $("<tr></tr>").append(driverId).append(name).append(gender).append(
-                phone).append(workphone).append(stateTd).append(lp).append(location).appendTo("#emps_table tbody");
-        });
-    }
+    });
 
 </script>
+
+
 </body>
 </html>

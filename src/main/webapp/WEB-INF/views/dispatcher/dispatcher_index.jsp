@@ -104,7 +104,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/merchandise/getneeddispatche?id=${employee.id}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>待调度货物信息</p>
                 </a>
@@ -163,7 +163,7 @@
           </li>
         
         	<li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/dispatch/makedispatcher?id=${employee.id}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>生成调度单</p>
                 </a>

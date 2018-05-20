@@ -35,4 +35,8 @@ public interface MerchandiseMapper {
     List<Merchandise> selectAllByShoudendPointId(int shouldendpoint);
 
     void updateByMerchandiseForState(int id);
+
+    List<Merchandise> selectAll();
+
+    List<Merchandise> selectAllNeedDispatche();
 }

@@ -29,4 +29,6 @@ public interface PointMapper {
     int updateByPrimaryKey(Point record);
 
     List<Point> selectAllPoint();
+
+    List<Point> selectAllPointNeedDispatch();
 }

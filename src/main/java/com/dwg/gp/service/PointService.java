@@ -15,4 +15,8 @@ public class PointService {
     public List<Point> getAllPoints() {
         return pointMapper.selectAllPoint();
     }
+
+    public List<Point> getAllShouldDispatchPoints() {
+        return pointMapper.selectAllPointNeedDispatch();
+    }
 }

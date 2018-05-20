@@ -112,11 +112,23 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="selectAll" resultMap="BaseResultMapWithPoint">
+        select merchandise.id,volumn,weight,startpoint,endpoint,state,p1.id startid,p2.id endid,p1.name startname,p2.name endname,
+        p1.type starttype,p2.type endtype,p1.location startlocation,p2.location endlocation
+        from point p1 join merchandise on p1.id=merchandise.startpoint join point p2 on merchandise.endpoint=p2.id
+    </select>
+
     <select id="selectAllByShoudendPointId" parameterType="int" resultMap="BaseResultMapWithPoint">
         select merchandise.id,volumn,weight,startpoint,endpoint,state,p1.id startid,p2.id endid,p1.name startname,p2.name endname,
         p1.type starttype,p2.type endtype,p1.location startlocation,p2.location endlocation
         from point p1 join merchandise on p1.id=merchandise.startpoint join point p2 on merchandise.endpoint=p2.id
-        where merchandise.endpoint=#{shouldendpoint} and state=1
+        where merchandise.endpoint=#{shouldendpoint} and state!=2
+    </select>
+
+    <select id="selectAllNeedDispatche" resultMap="BaseResultMapWithPoint">
+        select merchandise.id,volumn,weight,startpoint,endpoint,state,p1.id startid,p2.id endid,p1.name startname,p2.name endname,
+        p1.type starttype,p2.type endtype,p1.location startlocation,p2.location endlocation
+        from point p1 join merchandise on p1.id=merchandise.startpoint join point p2 on merchandise.endpoint=p2.id and state=1
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

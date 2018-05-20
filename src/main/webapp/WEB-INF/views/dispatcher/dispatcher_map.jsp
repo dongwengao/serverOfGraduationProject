@@ -19,8 +19,79 @@
     <link rel="stylesheet" href="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=fRnaUbQzjKctONFGiLqsuaQBArEg0EuG"></script>
 </head>
 <body class="hold-transition sidebar-mini">
+
+
+<!---Modal-->
+<div class="modal fade" id="dispatchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">添加调配任务</h4>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-horizontal" id="pack_form">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            待调配货单号
+                        </label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="merchandiseId" id="merchandiseId">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            可分配卡车
+                        </label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="truckId" id="truckId">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            可分配司机
+                        </label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="deliverId" id="deliverId">
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            应该到达日期
+                        </label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="deliverId" id="shouldArriveDate">
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="goods_save_btn">保存</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
 <div class="wrapper">
 
     <!-- Navbar -->
@@ -188,31 +259,7 @@
     <div class="content-wrapper">
         <section class="content">
 
-
-            <div class="container">
-                <!-- 显示表格数据 -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-hover" id="emps_table">
-                            <thead>
-                            <tr>
-                                <th>姓名</th>
-                                <th>性别</th>
-                                <th>电话</th>
-                                <th>工作电话</th>
-                                <th>工作状态</th>
-                                <th>最近一次所在位置</th>
-                                <th>所处位置</th>
-                                <th></th>
-                            </tr>
-                            <thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <div id="allmap" style="width: 100%;height:600px"></div>
 
         </section>
     </div>
@@ -233,50 +280,66 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
 <!-- jQuery -->
 <script src="../../../plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<!-- Bootstrap 4 -->
+<%--<!-- Bootstrap 4 -->--%>
 <script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
+<%--<!-- Bootstrap WYSIHTML5 -->--%>
 <script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- AdminLTE App -->
+<%--<!-- AdminLTE App -->--%>
 <script src="../../../dist/js/adminlte.js"></script>
 <script>
-    $(function () {
-        to_page(1);
-    });
 
-    function to_page(pn) {
+var points;
+var markers;
+var i;
+    $(function(){
+        //获得有需要调度订单的位置
         $.ajax({
-            url: "/driver/driversusejson",
-            type: "get",
-            success: function (result) {
-                build_driver_table(result);
+            url:"/dispatch/getallpointsneeddispatch",
+            success:function (result) {
+                initMarker(result);
+                getMap();
+
             }
         });
+    });
+
+    function initMarker(result){
+        points=result.extend.points;
+        markers=new Array(points.length);
+        for(i=0;i<points.length;i++){
+            var strs=points[i].location.split(',');
+            markers[i]=new BMap.Marker(new BMap.Point(strs[0],strs[1]),15);
+        }
     }
 
-    function build_driver_table(result) {
-        //清空table表格
-        $("#emps_table tbody").empty();
-        var drivers = result.extend.drivers;
-        $.each(drivers, function (index, item) {
-            var driverId=$("<td></td>").append(item.id);
-            var name = $("<td></td>").append(item.name);
-            var gender=$("<td></td>").append(item.gender);
-            var stateTd=$("<td></td>").append('送货');
-            var phone=$("<td></td>").append(item.phone);
-            var workphone=$("<td></td>").append(item.deliver.collectionNum);
-            var lp=$("<td></td>").append(item.deliver.point.name);
-            var location=$("<td></td>").append(item.deliver.location);
 
-            $("<tr></tr>").append(driverId).append(name).append(gender).append(
-                phone).append(workphone).append(stateTd).append(lp).append(location).appendTo("#emps_table tbody");
-        });
+function getMap(){
+    var map = new BMap.Map("allmap");    // 创建Map实例
+    var strs=points[0].location.split(',');
+    map.centerAndZoom(new BMap.Point(strs[0],strs[1]), 15);  // 初始化地图,设置中心点坐标和地图级别
+    //set marker
+    for(i=0;i<points.length;i++){
+        map.addOverlay(markers[i]);
+        markers[i].addEventListener("click",getModal);
     }
+
+    //添加地图类型控件
+    map.addControl(new BMap.MapTypeControl({
+        mapTypes:[
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]}));
+    map.setCurrentCity("");          // 设置地图显示的城市 此项是必须设置的
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+}
+
+function getModal(){
+        $('#dispatchModal').modal();
+}
 
 </script>
 </body>
