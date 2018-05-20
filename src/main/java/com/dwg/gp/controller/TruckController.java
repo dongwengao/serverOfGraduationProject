@@ -5,6 +5,7 @@ import com.dwg.gp.bean.Msg;
 import com.dwg.gp.bean.Truck;
 import com.dwg.gp.dao.EmployeeMapper;
 import com.dwg.gp.dao.TruckMapper;
+import com.dwg.gp.service.TruckService;
 import com.dwg.gp.utils.Base64ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,9 @@ public class TruckController {
     @Autowired
     EmployeeMapper employeeMapper;
 
+    @Autowired
+    TruckService truckService;
+
 
     @RequestMapping("/truckall")
     public String getAllTruck(@RequestParam("id")int id,HttpServletRequest request, Model model) throws Exception {
@@ -50,14 +54,21 @@ public class TruckController {
     @RequestMapping("/truckalljson")
     @ResponseBody
     public Msg getAllTruckForJson(HttpServletRequest request){
-       List<Truck> trucks= truckMapper.seleckAllTruck();
+        List<Truck> trucks=truckService.getAllTruck();
         return Msg.success().add("trucks",trucks);
     }
 
     @RequestMapping("/truckusejson")
     @ResponseBody
     public Msg getUseTruckForJson(HttpServletRequest request){
-        List<Truck> trucks= truckMapper.selectUseTruck();
+        List<Truck> trucks=truckService.getUseTruck();
+        return Msg.success().add("trucks",trucks);
+    }
+
+    @RequestMapping("/gettruckbypid")
+    @ResponseBody
+    public Msg getTruckByPid(HttpServletRequest request,@RequestParam("id") int id){
+        List<Truck> trucks=truckService.getAllTruckByPid(id);
         return Msg.success().add("trucks",trucks);
     }
 

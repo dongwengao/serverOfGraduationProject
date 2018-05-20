@@ -18,6 +18,8 @@ public interface DispatchMapper {
 
     List<Dispatch> selectByExample(DispatchExample example);
 
+    List<Dispatch> selectAllDispatch();
+
     Dispatch selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Dispatch record, @Param("example") DispatchExample example);

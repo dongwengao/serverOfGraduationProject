@@ -19,8 +19,10 @@
     <link rel="stylesheet" href="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="/static/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=fRnaUbQzjKctONFGiLqsuaQBArEg0EuG"></script>
+
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -34,7 +36,15 @@
             </div>
 
             <div class="modal-body">
-                <form class="form-horizontal" id="pack_form">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">
+                        地点性质
+                    </label>
+                    <div class="col-sm-10">
+                        <label class="col-sm-4 control-label" id="stationtype"/>
+                    </div>
+                </div>
+                <form class="form-horizontal" id="dispatch_form">
                     <div class="form-group">
                         <label class="col-sm-4 control-label">
                             待调配货单号
@@ -71,15 +81,14 @@
                             应该到达日期
                         </label>
                         <div class="col-sm-10">
-                            <select class="form-control" name="deliverId" id="shouldArriveDate">
+                            <input id="date" name="endDateShould">
 
-                            </select>
                         </div>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" id="goods_save_btn">保存</button>
+                        <button type="button" class="btn btn-primary" id="dispatch_save_btn">保存</button>
                     </div>
 
                 </form>
@@ -88,8 +97,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <div class="wrapper">
@@ -242,7 +249,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="/dispatch/alldispatch?id=${employee.id}" class="nav-link">
                             <i class="fa fa-circle-o nav-icon"></i>
                             <p>查看调度单</p>
                         </a>
@@ -290,16 +297,20 @@
 <script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <%--<!-- AdminLTE App -->--%>
 <script src="../../../dist/js/adminlte.js"></script>
+<script src="/static/bootstrap-datetimepicker.min.js"></script>
 <script>
 
-var points;
-var markers;
-var i;
-    $(function(){
+    $("#date").datetimepicker();
+
+    var points;
+    var markers;
+    var i;
+    $(function () {
+
         //获得有需要调度订单的位置
         $.ajax({
-            url:"/dispatch/getallpointsneeddispatch",
-            success:function (result) {
+            url: "/dispatch/getallpointsneeddispatch",
+            success: function (result) {
                 initMarker(result);
                 getMap();
 
@@ -307,39 +318,100 @@ var i;
         });
     });
 
-    function initMarker(result){
-        points=result.extend.points;
-        markers=new Array(points.length);
-        for(i=0;i<points.length;i++){
-            var strs=points[i].location.split(',');
-            markers[i]=new BMap.Marker(new BMap.Point(strs[0],strs[1]),15);
+    function initMarker(result) {
+        points = result.extend.points;
+        markers = new Array(points.length);
+        for (i = 0; i < points.length; i++) {
+            var strs = points[i].location.split(',');
+            markers[i] = new BMap.Marker(new BMap.Point(strs[0], strs[1]), 15);
+            markers[i].addEventListener("click", getModal.bind(this, points[i].id));
         }
     }
 
+    function getMap() {
+        var map = new BMap.Map("allmap");    // 创建Map实例
+        var strs = points[0].location.split(',');
+        map.centerAndZoom(new BMap.Point(strs[0], strs[1]), 15);  // 初始化地图,设置中心点坐标和地图级别
+        //set marker
+        for (i = 0; i < points.length; i++) {
+            map.addOverlay(markers[i]);
+        }
 
-function getMap(){
-    var map = new BMap.Map("allmap");    // 创建Map实例
-    var strs=points[0].location.split(',');
-    map.centerAndZoom(new BMap.Point(strs[0],strs[1]), 15);  // 初始化地图,设置中心点坐标和地图级别
-    //set marker
-    for(i=0;i<points.length;i++){
-        map.addOverlay(markers[i]);
-        markers[i].addEventListener("click",getModal);
+        //添加地图类型控件
+        map.addControl(new BMap.MapTypeControl({
+            mapTypes: [
+                BMAP_NORMAL_MAP,
+                BMAP_HYBRID_MAP
+            ]
+        }));
+        map.setCurrentCity("");          // 设置地图显示的城市 此项是必须设置的
+        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
     }
 
-    //添加地图类型控件
-    map.addControl(new BMap.MapTypeControl({
-        mapTypes:[
-            BMAP_NORMAL_MAP,
-            BMAP_HYBRID_MAP
-        ]}));
-    map.setCurrentCity("");          // 设置地图显示的城市 此项是必须设置的
-    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-}
+    function getModal(pid) {
+        $.ajax({
+            url: "/truck/gettruckbypid",
+            data: "id=" + pid,
+            success: function (result) {
+                $("#truckId").empty();
+                $.each(result.extend.trucks, function () {
 
-function getModal(){
-        $('#dispatchModal').modal();
-}
+                    var optionEle = $("<option></option>").append(this.plateNum).attr("value", this.id);
+                    optionEle.appendTo("#truckId");
+                });
+            }
+        });
+
+        $.ajax({
+            url:"/driver/getdriverbypid",
+            data:"id="+pid,
+            success:function (result) {
+                $("#deliverId").empty();
+                $.each(result.extend.drivers, function () {
+
+                    var optionEle = $("<option></option>").append(this.name).attr("value", this.id);
+                    optionEle.appendTo("#deliverId");
+                });
+            }
+        });
+
+        var type;
+        if (points[pid - 1].type == '1') {
+            type = "超市";
+        } else if (points[pid - 1].type == '2') {
+            type = '仓库';
+        } else if (points[pid - 1].type = '3') {
+            type = '工厂';
+        }
+        $('#stationtype').empty();
+        $('#stationtype').append(type);
+        $.ajax({
+            url: "/merchandise/getmerchandisebypid",
+            data: "id=" + pid,
+            success: function (result) {
+                $("#dispatch_form #merchandiseId").empty();
+                $.each(result.extend.merchandise, function () {
+
+                    var optionEle = $("<option></option>").append(this.id).attr("value", this.id);
+                    optionEle.appendTo("#merchandiseId");
+                });
+                $('#dispatchModal').modal();
+            }
+        });
+
+    }
+    
+    $('#dispatch_save_btn').click(function () {
+        $.ajax({
+            url:"/dispatch/savedispatch",
+            method:'post',
+            data:$.param({'dispatcherId': ${employee.id}}) + '&' + $('#dispatch_form').serialize(),
+            success:function (result) {
+                alert("success");
+            }
+        });
+
+    });
 
 </script>
 </body>

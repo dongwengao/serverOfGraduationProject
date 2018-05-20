@@ -39,4 +39,8 @@ public interface MerchandiseMapper {
     List<Merchandise> selectAll();
 
     List<Merchandise> selectAllNeedDispatche();
+
+    List<Merchandise> selectMerchandiseByPId(int id);
+
+    void updateDispatchedState(int id);
 }

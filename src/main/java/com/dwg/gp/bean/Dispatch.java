@@ -20,6 +20,26 @@ public class Dispatch {
                 '}';
     }
 
+    public Truck getTruckObject() {
+        return truckObject;
+    }
+
+    public void setTruckObject(Truck truckObject) {
+        this.truckObject = truckObject;
+    }
+
+    private Truck truckObject;
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    private Employee employee;
+
     private Integer dispatcherId;
 
     private Integer deliverId;

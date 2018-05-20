@@ -172,4 +172,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <update id="updateDeliverStateForDispatched" parameterType="int">
+    update deliver
+    set deliver.state=3
+    where deliver.deliver_id=#{id}
+  </update>
+
 </mapper>

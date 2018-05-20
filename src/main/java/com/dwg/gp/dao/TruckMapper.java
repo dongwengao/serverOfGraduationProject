@@ -31,4 +31,8 @@ public interface TruckMapper {
     List<Truck> seleckAllTruck();
 
     List<Truck> selectUseTruck();
+
+    List<Truck> seleckAllTruckByPid(int id);
+
+    void updateForDispatched(int id);
 }

@@ -36,4 +36,12 @@ public class MerchandiseService {
     public List<Merchandise> getNeedDispatchMerchandise() {
         return merchandiseMapper.selectAllNeedDispatche();
     }
+
+    public List<Merchandise> getMerchandiseByPid(int id) {
+        return merchandiseMapper.selectMerchandiseByPId(id);
+    }
+
+    public void updateMerchandiseForDispatched(int id) {
+        merchandiseMapper.updateDispatchedState(id);
+    }
 }

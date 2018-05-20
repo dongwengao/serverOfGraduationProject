@@ -16,4 +16,16 @@ public class TruckService {
     public List<Truck> getAllTruck(){
         return truckMapper.seleckAllTruck();
     }
+
+    public List<Truck> getAllTruckByPid(int id) {
+        return truckMapper.seleckAllTruckByPid(id);
+    }
+
+    public List<Truck> getUseTruck() {
+       return truckMapper.selectUseTruck();
+    }
+
+    public void updateTruckForDispatched(int id) {
+        truckMapper.updateForDispatched(id);
+    }
 }

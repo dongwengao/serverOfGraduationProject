@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -63,8 +63,7 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="fa fa-address-book"></i>
@@ -193,17 +192,14 @@
                 <!-- 显示表格数据 -->
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-hover" id="emps_table">
+                        <table class="table table-hover" id="dispatch_table">
                             <thead>
                             <tr>
-                                <th>车牌号</th>
-                                <th>载重量</th>
-                                <th>体积</th>
-                                <th>空间</th>
-                                <th>所处位置</th>
-                                <th>可用重量</th>
-                                <th>可用空间</th>
-                                <th></th>
+                                <th>调度编号</th>
+                                <th>调度人</th>
+                                <th>司机</th>
+                                <th>卡车</th>
+                                <th>货单号</th>
                             </tr>
                             <thead>
                             <tbody>
@@ -213,6 +209,7 @@
                     </div>
                 </div>
             </div>
+
 
         </section>
     </div>
@@ -245,40 +242,30 @@
 <!-- AdminLTE App -->
 <script src="../../../dist/js/adminlte.js"></script>
 <script>
-    $(function () {
-        to_page(1);
-    });
 
-    function to_page(pn) {
+
+    $(function(){
         $.ajax({
-            url: "/truck/truckusejson",
-            type: "get",
-            success: function (result) {
-                build_truck_table(result);
+            url:"/dispatch/getalldispatches",
+            success:function (result) {
+
+                var dispatches = result.extend.dispatches;
+                $.each(dispatches, function (index, item) {
+                    var idTd = $("<td></td>").append(item.id);
+                    var driverIdTd=$("<td></td>").append(item.deliverId);
+                    var dispatcherTd=$("<td></td>").append(item.employee.name);
+                    var truckTd=$("<td></td>").append(item.truckObject.plateNum);
+                    var merchandiseTd=$("<td></td>").append(item.merchandiseId);
+
+                    $("<tr></tr>").append(idTd).append(dispatcherTd).append(
+                        driverIdTd).append(truckTd).append(merchandiseTd).appendTo("#dispatch_table tbody");
+                });
+
+
+
             }
         });
-    }
-
-    function build_truck_table(result) {
-        console.log(result);
-        //清空table表格
-        $("#emps_table tbody").empty();
-        var trucks = result.extend.trucks;
-        $.each(trucks, function (index, item) {
-            var plateNumTd = $("<td></td>").append(item.plateNum);
-            var deadWeightTd=$("<td></td>").append(item.deadweight);
-            var stateTd=$("<td></td>").append(item.state == '1' ? '空闲' :item.state=='2'?'故障':'在路上');
-            var volumeTd=$("<td></td>").append(item.volume);
-            var ldTd=$("<td></td>").append(item.point.name);
-            var usedWeightTd=$("<td></td>").append(item.usedVolume);
-            var usedVolumeTd=$("<td></td>").append(item.usedWeight);
-
-            $("<tr></tr>").append(plateNumTd).append(deadWeightTd).append(
-                stateTd).append(volumeTd).append(ldTd).append(
-                usedVolumeTd).append(usedWeightTd).appendTo("#emps_table tbody");
-        });
-    }
-
+    });
 </script>
 </body>
 </html>

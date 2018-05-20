@@ -86,6 +86,11 @@
         SELECT * FROM truck,POINT WHERE truck.last_distribution_point=point.id and truck.state=1
   </select>
 
+  <select id="seleckAllTruckByPid" parameterType="int" resultMap="BaseResultMap">
+    SELECT * FROM truck
+    WHERE last_distribution_point=#{id}
+  </select>
+
 
   <select id="selectByExample" parameterType="com.dwg.gp.bean.TruckExample" resultMap="BaseResultMap">
     select
@@ -285,5 +290,11 @@
       used_volume = #{usedVolume,jdbcType=DOUBLE},
       used_weight = #{usedWeight,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateForDispatched" parameterType="int">
+    update truck
+    set truck.state=2
+    where truck.id=#{id}
   </update>
 </mapper>

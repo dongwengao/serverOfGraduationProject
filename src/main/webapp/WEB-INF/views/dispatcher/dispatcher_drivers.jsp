@@ -171,7 +171,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="/dispatch/alldispatch?id=${employee.id}" class="nav-link">
                             <i class="fa fa-circle-o nav-icon"></i>
                             <p>查看调度单</p>
                         </a>
@@ -267,8 +267,8 @@
         $.each(drivers, function (index, item) {
             var driverId=$("<td></td>").append(item.id);
             var name = $("<td></td>").append(item.name);
-            var gender=$("<td></td>").append(item.gender);
-            var stateTd=$("<td></td>").append(item.deliver.state == '1' ? '送货' :'没送货');
+            var gender=$("<td></td>").append(item.gender=='1'?'男':'女');
+            var stateTd=$("<td></td>").append(item.deliver.state == '1' ?'送货':item.deliver.state=='2'?'空闲':'被调度');
             var phone=$("<td></td>").append(item.phone);
             var workphone=$("<td></td>").append(item.deliver.collectionNum);
             var lp=$("<td></td>").append(item.deliver.point.name);

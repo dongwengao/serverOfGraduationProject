@@ -164,14 +164,14 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="/dispatch/makedispatcher?id=${employee.id}" class="nav-link">
                             <i class="fa fa-circle-o nav-icon"></i>
                             <p>生成调度单</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="/dispatch/alldispatch?id=${employee.id}" class="nav-link">
                             <i class="fa fa-circle-o nav-icon"></i>
                             <p>查看调度单</p>
                         </a>

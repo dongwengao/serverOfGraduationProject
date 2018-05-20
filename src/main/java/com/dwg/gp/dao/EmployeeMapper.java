@@ -1,5 +1,6 @@
 package com.dwg.gp.dao;
 
+import com.dwg.gp.bean.Deliver;
 import com.dwg.gp.bean.Employee;
 import com.dwg.gp.bean.EmployeeExample;
 
@@ -51,4 +52,6 @@ public interface EmployeeMapper {
     List<Employee> selectAllDriver();
 
     List<Employee> selectAlluseDriver();
+
+    List<Deliver> selectAllDriverByPid(int id);
 }

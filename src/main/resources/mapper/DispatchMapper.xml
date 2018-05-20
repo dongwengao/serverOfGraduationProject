@@ -12,6 +12,14 @@
     <result column="end_date_should" jdbcType="DATE" property="endDateShould" />
     <result column="end_date_real" jdbcType="DATE" property="endDateReal" />
   </resultMap>
+  <resultMap id="BaseResultMapWithOther" type="com.dwg.gp.bean.Dispatch" extends="BaseResultMap">
+   <association property="truckObject" javaType="com.dwg.gp.bean.Truck">
+     <result column="plate_num" property="plateNum"/>
+   </association>
+    <association property="employee" javaType="com.dwg.gp.bean.Employee">
+      <result column="name" property="name"/>
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -104,16 +112,28 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
+  <select id="selectAllDispatch" resultMap="BaseResultMapWithOther">
+    SELECT dispatch.`id`,deliver.`deliver_id`,truck.`plate_num`,employee.name,end_date_real,merchandise_id
+    FROM dispatch JOIN deliver ON dispatch.`deliver_id`= deliver.`deliver_id` JOIN employee ON dispatch.`dispatcher_id`=employee.`id`
+    JOIN truck ON truck.`id`=dispatch.`truck_id`
+  </select>
+
+
   <insert id="insert" parameterType="com.dwg.gp.bean.Dispatch">
-    insert into dispatch (id, dispatcher_id, deliver_id, 
+    <selectKey resultType="int" keyProperty="id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dispatch (dispatcher_id, deliver_id,
       truck_id, merchandise_id, create_time, 
       start_date, end_date_should, end_date_real
       )
-    values (#{id,jdbcType=INTEGER}, #{dispatcherId,jdbcType=INTEGER}, #{deliverId,jdbcType=INTEGER}, 
+    values (#{dispatcherId,jdbcType=INTEGER}, #{deliverId,jdbcType=INTEGER},
       #{truckId,jdbcType=INTEGER}, #{merchandiseId,jdbcType=INTEGER}, #{createTime,jdbcType=TIME}, 
       #{startDate,jdbcType=DATE}, #{endDateShould,jdbcType=DATE}, #{endDateReal,jdbcType=DATE}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.dwg.gp.bean.Dispatch">
     insert into dispatch
     <trim prefix="(" suffix=")" suffixOverrides=",">

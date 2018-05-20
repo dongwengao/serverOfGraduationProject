@@ -1,5 +1,6 @@
 package com.dwg.gp.service;
 
+import com.dwg.gp.bean.Deliver;
 import com.dwg.gp.bean.Employee;
 import com.dwg.gp.dao.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,9 @@ public class EmployeeInfoService {
 
     public List<Employee> getAlluseDriver() {
         return employeeMapper.selectAlluseDriver();
+    }
+
+    public List<Deliver> getDeliverByPid(int id) {
+        return employeeMapper.selectAllDriverByPid(id);
     }
 }

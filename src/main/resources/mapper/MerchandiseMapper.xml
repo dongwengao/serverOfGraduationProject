@@ -125,6 +125,13 @@
         where merchandise.endpoint=#{shouldendpoint} and state!=2
     </select>
 
+    <select id="selectMerchandiseByPId" resultMap="BaseResultMapWithPoint">
+        select merchandise.id,volumn,weight,startpoint,endpoint,state,p1.id startid,p2.id endid,p1.name startname,p2.name endname,
+        p1.type starttype,p2.type endtype,p1.location startlocation,p2.location endlocation
+        from point p1 join merchandise on p1.id=merchandise.startpoint join point p2 on merchandise.endpoint=p2.id
+        where merchandise.startpoint=#{id} and merchandise.state=1
+    </select>
+
     <select id="selectAllNeedDispatche" resultMap="BaseResultMapWithPoint">
         select merchandise.id,volumn,weight,startpoint,endpoint,state,p1.id startid,p2.id endid,p1.name startname,p2.name endname,
         p1.type starttype,p2.type endtype,p1.location startlocation,p2.location endlocation
@@ -258,6 +265,11 @@
 
     <update id="updateByMerchandiseForState" parameterType="int">
         update merchandise set state=2
+        where merchandise.id=#{id}
+    </update>
+
+    <update id="updateDispatchedState" parameterType="int">
+        update merchandise set state=3
         where merchandise.id=#{id}
     </update>
 

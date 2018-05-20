@@ -27,6 +27,14 @@ public class MerchandiseController {
     @Autowired
     MerchandiseService merchandiseService;
 
+    @RequestMapping("/getmerchandisebypid")
+    @ResponseBody
+    public Msg getMerchandiseBypId(@RequestParam("id") int id,HttpServletRequest request){
+        List<Merchandise>  list=merchandiseService.getMerchandiseByPid(id);
+        return Msg.success().add("merchandise",list);
+    }
+
+
     @RequestMapping("/getallmerchandise")
     public String getMerchandise(HttpServletRequest request, Model model, @RequestParam("id") int id) throws Exception {
         Employee employee=employeeInfoService.getEmployeeForCostar(id);

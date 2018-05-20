@@ -171,7 +171,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="/dispatch/alldispatch?id=${employee.id}" class="nav-link">
                             <i class="fa fa-circle-o nav-icon"></i>
                             <p>查看调度单</p>
                         </a>
@@ -196,6 +196,7 @@
                         <table class="table table-hover" id="emps_table">
                             <thead>
                             <tr>
+                                <th>司机编号</th>
                                 <th>姓名</th>
                                 <th>性别</th>
                                 <th>电话</th>
@@ -267,7 +268,7 @@
             var driverId=$("<td></td>").append(item.id);
             var name = $("<td></td>").append(item.name);
             var gender=$("<td></td>").append(item.gender);
-            var stateTd=$("<td></td>").append('送货');
+            var stateTd=$("<td></td>").append('空闲');
             var phone=$("<td></td>").append(item.phone);
             var workphone=$("<td></td>").append(item.deliver.collectionNum);
             var lp=$("<td></td>").append(item.deliver.point.name);
