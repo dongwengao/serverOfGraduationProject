@@ -1,5 +1,7 @@
 package com.dwg.gp.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Dispatch {
@@ -96,6 +98,7 @@ public class Dispatch {
         this.merchandiseId = merchandiseId;
     }
 
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -104,6 +107,8 @@ public class Dispatch {
         this.createTime = createTime;
     }
 
+
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     public Date getStartDate() {
         return startDate;
     }
@@ -112,6 +117,7 @@ public class Dispatch {
         this.startDate = startDate;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     public Date getEndDateShould() {
         return endDateShould;
     }
@@ -120,6 +126,7 @@ public class Dispatch {
         this.endDateShould = endDateShould;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     public Date getEndDateReal() {
         return endDateReal;
     }

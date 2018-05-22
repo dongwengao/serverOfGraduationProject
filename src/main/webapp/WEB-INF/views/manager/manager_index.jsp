@@ -89,7 +89,7 @@
 
         	
         	<li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/manager1/getLocationInfo?id=${employee.id}" class="nav-link">
               <i class="fa fa-home"></i>
               <p>
                 	工作地点

@@ -107,13 +107,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/driver/getallmissions?id=${employee.id}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>查看历史信息</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="/driver/manipulatedispatch?id=${employee.id}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>操作任务</p>
                 </a>

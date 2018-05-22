@@ -10,8 +10,11 @@
         <result column="state" jdbcType="INTEGER" property="state"/>
     </resultMap>
 
+    <resultMap id="ResultMapWithBLOBs" extends="BaseResultMap" type="com.dwg.gp.bean.Merchandise">
+        <result column="qrimg" jdbcType="LONGVARBINARY" property="qrimg"/>
+    </resultMap>
 
-    <resultMap id="BaseResultMapWithPoint" type="com.dwg.gp.bean.Merchandise" extends="BaseResultMap">
+    <resultMap id="BaseResultMapWithPoint" type="com.dwg.gp.bean.Merchandise" extends="ResultMapWithBLOBs">
         <association property="startpointobject" javaType="com.dwg.gp.bean.Point">
             <result column="startname" property="name"/>
             <result column="startid" property="id"/>
@@ -25,8 +28,6 @@
             <result column="endlocation" property="location"/>
         </association>
     </resultMap>
-
-
 
     <sql id="Example_Where_Clause">
         <where>

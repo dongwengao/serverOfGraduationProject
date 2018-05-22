@@ -19,4 +19,12 @@ public class PointService {
     public List<Point> getAllShouldDispatchPoints() {
         return pointMapper.selectAllPointNeedDispatch();
     }
+
+    public Point getPointById(int id) {
+        return pointMapper.selectByPrimaryKey(id);
+    }
+
+    public Point getPointByManagerId(int id) {
+        return pointMapper.selectPointByManagerId(id);
+    }
 }

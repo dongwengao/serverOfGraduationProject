@@ -1,13 +1,7 @@
 package com.dwg.gp.controller;
 
-import com.dwg.gp.bean.Employee;
-import com.dwg.gp.bean.Manager;
-import com.dwg.gp.bean.Merchandise;
-import com.dwg.gp.bean.Msg;
-import com.dwg.gp.service.EmployeeInfoService;
-import com.dwg.gp.service.ManagerService;
-import com.dwg.gp.service.MerchandiseService;
-import com.dwg.gp.service.PackageService;
+import com.dwg.gp.bean.*;
+import com.dwg.gp.service.*;
 import com.dwg.gp.utils.Base64ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,6 +30,12 @@ public class ManagerController {
     @Autowired
     PackageService packageService;
 
+    @Autowired
+    DispatchService dispatchService;
+
+    @Autowired
+    PointService pointService;
+
     @RequestMapping("/addmerchandise")
     public String addMerchandise(@RequestParam("id") int id,HttpServletRequest request, Model model) throws Exception {
         Employee employee=employeeInfoService.getEmployeeForCostar(id);
@@ -52,13 +52,23 @@ public class ManagerController {
         return "manager/manager_examInputmerchandise";
     }
 
+    @RequestMapping("/getLocationInfo")
+    public String GetLocationInfo(HttpServletRequest request,@RequestParam("id")int id,Model model) throws Exception {
+        Employee employee=employeeInfoService.getEmployeeForCostar(id);
+        Point point=pointService.getPointByManagerId(id);
+        model.addAttribute("employee",employee);
+        model.addAttribute("img",Base64ImageUtil.byteArr2String(employee.getPhoto()));
+        model.addAttribute("point",point);
+        return "manager/manager_location";
+    }
+
     @RequestMapping("/suremerchandise")
     @ResponseBody
     public Msg sureMerchandise(@RequestParam("id") int id,HttpServletRequest request, Model model) throws Exception {
         merchandiseService.sureArrive(id);
+        dispatchService.sureDispatchArrived(id);
         return Msg.success().add("success","success");
     }
-
 
     @RequestMapping("/suremerchandisepack")
     @ResponseBody
@@ -66,9 +76,6 @@ public class ManagerController {
         packageService.surePackArrived(id);
         return Msg.success().add("success","success");
     }
-
-
-
 
     @RequestMapping("/getallinput")
     @ResponseBody
@@ -104,6 +111,8 @@ public class ManagerController {
     @ResponseBody
     public Msg updateTheMerchandise(HttpServletRequest request,Merchandise merchandise){
         merchandiseService.updateMerchandise(merchandise);
+        //增加一个二维码
+        
         return Msg.success().add("success","添加成功");
     }
 

@@ -31,4 +31,6 @@ public interface PointMapper {
     List<Point> selectAllPoint();
 
     List<Point> selectAllPointNeedDispatch();
+
+    Point selectPointByManagerId(int id);
 }

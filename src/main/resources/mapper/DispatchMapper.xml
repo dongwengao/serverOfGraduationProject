@@ -102,6 +102,8 @@
     from dispatch
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from dispatch
     where id = #{id,jdbcType=INTEGER}
@@ -117,6 +119,12 @@
     SELECT dispatch.`id`,deliver.`deliver_id`,truck.`plate_num`,employee.name,end_date_real,merchandise_id
     FROM dispatch JOIN deliver ON dispatch.`deliver_id`= deliver.`deliver_id` JOIN employee ON dispatch.`dispatcher_id`=employee.`id`
     JOIN truck ON truck.`id`=dispatch.`truck_id`
+  </select>
+
+  <select id="selectDriverDispatch" parameterType="int" resultMap="BaseResultMapWithOther">
+    SELECT dispatch.`id`,deliver.`deliver_id`,truck.`plate_num`,employee.name,end_date_real,merchandise_id,end_date_should
+    FROM dispatch JOIN deliver ON dispatch.`deliver_id`= deliver.`deliver_id` JOIN employee ON dispatch.`dispatcher_id`=employee.`id`
+    JOIN truck ON truck.`id`=dispatch.`truck_id` where deliver.deliver_id=#{id}
   </select>
 
 
@@ -281,6 +289,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.dwg.gp.bean.Dispatch">
     update dispatch
     set dispatcher_id = #{dispatcherId,jdbcType=INTEGER},
@@ -292,5 +301,16 @@
       end_date_should = #{endDateShould,jdbcType=DATE},
       end_date_real = #{endDateReal,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateAddendDateByMId" parameterType="int">
+    update dispatch
+    set end_date_real=NOW()
+    where merchandise_id=#{id}
+  </update>
+  <update id="updateStartDate" parameterType="int">
+    update dispatch
+    set start_date=NOW()
+    where dispatch.id=#{id}
   </update>
 </mapper>

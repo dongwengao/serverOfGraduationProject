@@ -32,7 +32,8 @@
             </div>
 
             <div class="modal-body">
-                <form class="form-horizontal" action="/updateInfo/updateDriver?id=${employee.id}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action="/updateInfo/updateDriver?id=${employee.id}" method="post"
+                      enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                             姓名
@@ -208,50 +209,37 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content">
-            <table class="table table-hover" id="emps_table">
-                <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>${employee.name}</th>
-                </tr>
-                <tr>
-                    <th>性别</th>
-                    <th><c:if test="${employee.gender eq '1'}">男</c:if>
-                        <c:if test="${employee.gender eq '2'}">女</c:if>
-                    </th>
-                </tr>
-                <tr>
-                    <th>电话</th>
-                    <th>${employee.phone}</th>
-                </tr>
-                <tr>
-                    <th>照片</th>
-                    <th><img src="data:image/png;base64,${img}"></th>
-                </tr>
-                <tr>
-                    <th>工作电话</th>
-                    <th>${employee.deliver.collectionNum}</th>
-                </tr>
-                <tr>
-                    <th>工作状态</th>
-                    <th>
-                        <c:if test="${employee.deliver.state eq '1'}">送货</c:if>
-                        <c:if test="${employee.deliver.state eq '2'}">空闲</c:if>
-                    </th>
-                </tr>
-                <tr>
-                    <th>最近一次所在点</th>
-                    <th>${employee.deliver.point.name}</th>
-                </tr>
-                <tr>
-                    <th>所处位置</th>
-                    <th>${employee.deliver.location}</th>
-                </tr>
-                <thead>
-                <tbody>
 
-                </tbody>
-            </table>
+
+            <div class="container box-body table-responsive no-padding">
+                <!-- Main hero unit for a primary marketing message or call to action -->
+                <div class="leaderboard">
+                    <h1>所有货物信息</h1>
+                </div>
+                <!-- Example row of columns -->
+                <div class="">
+                    <!-- 显示表格数据 -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover" id="mission_table">
+                                <thead>
+                                <tr>
+                                    <th>调度单编号</th>
+                                    <th>用车</th>
+                                    <th>应该到达时间</th>
+                                    <th>实到达时间</th>
+                                </tr>
+                                <thead>
+                                <tbody id="dispatchList">
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </section>
     </div>
@@ -287,13 +275,28 @@
 <!-- AdminLTE App -->
 <script src="../../../dist/js/adminlte.js"></script>
 <script>
-    $('#emp_update_p').click(function () {
-        $('#empUpdateModal').modal({});
-    });
+    $(function () {
+        $.ajax({
+            url:"/driver/getdriverhistorydispatch",
+            data:"id="+${employee.id},
+            success:function(result){
+                //清空table表格
+                $("#dispatchList").empty();
+                var dispatches = result.extend.dispatches;
+                $.each(dispatches, function (index, item) {
 
-    // $('emp_save_btn').click(function(){
-    //
-    // });
+
+
+                    var idTd=$("<td></td>").append(item.id);
+                    var truckTd = $("<td></td>").append(item.truckObject.plateNum);
+                    var endTd=$("<td></td>").append(item.endDateShould);
+                    var endrealTd=$("<td></td>").append(item.endDateReal);
+                    $("<tr></tr>").append(idTd).append(truckTd).append(endTd).append(endrealTd).appendTo("#dispatchList");
+
+                });
+            }
+        });
+    });
 
 </script>
 </body>

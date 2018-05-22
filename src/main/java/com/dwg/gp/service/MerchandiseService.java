@@ -44,4 +44,8 @@ public class MerchandiseService {
     public void updateMerchandiseForDispatched(int id) {
         merchandiseMapper.updateDispatchedState(id);
     }
+
+    public Merchandise getMerchandiseById(int id) {
+        return merchandiseMapper.selectByPrimaryKey(id);
+    }
 }

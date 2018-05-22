@@ -75,7 +75,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/employee/costardetailinfo1?id=${employee.id}" class="nav-link">
+                                <a href="/employee/managerdetailinfo1?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>查看个人信息</p>
                                 </a>
@@ -89,94 +89,46 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-suitcase"></i>
-                            <p>
-                                货物信息
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="/merchandise/getallmerchandise?id=${employee.id}" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>查看货物信息</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/merchandise/getneeddispatche?id=${employee.id}" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>待调度货物信息</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-truck"></i>
-                            <p>
-                                卡车信息
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="/truck/truckall?id=${employee.id}" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>查看卡车信息</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/truck/usetruck?id=${employee.id}" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>可调度卡车信息</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-user-circle-o"></i>
-                            <p>
-                                司机信息
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="/driver/drivers?id=${employee.id}" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>查看司机信息</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/driver/driversuse?id=${employee.id}" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>可调度司机信息</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
 
                     <li class="nav-item">
-                        <a href="/dispatch/makedispatcher?id=${employee.id}" class="nav-link">
-                            <i class="fa fa-circle-o nav-icon"></i>
-                            <p>生成调度单</p>
+                        <a href="/manager1/getLocationInfo?id=${employee.id}" class="nav-link">
+                            <i class="fa fa-home"></i>
+                            <p>
+                                工作地点
+                            </p>
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="/dispatch/alldispatch?id=${employee.id}" class="nav-link">
-                            <i class="fa fa-circle-o nav-icon"></i>
-                            <p>查看调度单</p>
-                        </a>
-                    </li>
 
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-tasks"></i>
+                            <p>
+                                任务清单
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>查看历史信息</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/manager1/examInputMerchandise?id=${employee.id}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>进货任务</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/manager1/addmerchandise?id=${employee.id}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>出货任务</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -188,34 +140,37 @@
     <div class="content-wrapper">
         <section class="content">
 
+            <table class="table table-hover" id="emps_table">
+                <thead>
 
-            <div class="container">
-                <!-- 显示表格数据 -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-hover" id="emps_table">
-                            <thead>
-                            <tr>
-                                <th>车牌号</th>
-                                <th>载重量</th>
-                                <th>状态</th>
-                                <th>体积</th>
-                                <th>所处位置</th>
-                                <th>可用重量</th>
-                                <th>可用空间</th>
-                                <th></th>
-                            </tr>
-                            <thead>
-                            <tbody>
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                <thead>
+                <tbody>
+                <tr>
+                    <th>编号</th>
+                    <th>${point.id}</th>
+                </tr>
+                <tr>
+                    <th>类别</th>
+                    <th><c:if test="${point.type eq '1'}">超市</c:if>
+                        <c:if test="${point.type eq '2'}">仓库</c:if>
+                        <c:if test="${point.type eq '3'}">工厂</c:if>
+                    </th>
+                </tr>
+                <tr>
+                    <th>名称</th>
+                    <th>${point.name}</th>
+                </tr>
+                <tr>
+                    <th>位置</th>
+                    <th>${point.location}</th>
+                </tr>
+                </tbody>
+            </table>
 
         </section>
     </div>
+
 
     <!-- /.content-wrapper -->
     <footer class="main-footer">
@@ -244,40 +199,5 @@
 <script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../../dist/js/adminlte.js"></script>
-<script>
-    $(function () {
-        to_page(1);
-    });
-
-    function to_page(pn) {
-        $.ajax({
-            url: "/truck/truckalljson",
-            type: "get",
-            success: function (result) {
-                build_truck_table(result);
-            }
-        });
-    }
-
-    function build_truck_table(result) {
-        //清空table表格
-        $("#emps_table tbody").empty();
-        var trucks = result.extend.trucks;
-        $.each(trucks, function (index, item) {
-            var plateNumTd = $("<td></td>").append(item.plateNum);
-            var deadWeightTd=$("<td></td>").append(item.deadweight);
-            var stateTd=$("<td></td>").append(item.state == '1' ? '空闲' :item.state=='2'?'故障':'在路上');
-            var volumeTd=$("<td></td>").append(item.volume);
-            var ldTd=$("<td></td>").append(item.point.name);
-            var usedWeightTd=$("<td></td>").append(item.usedVolume);
-            var usedVolumeTd=$("<td></td>").append(item.usedWeight);
-
-            $("<tr></tr>").append(plateNumTd).append(deadWeightTd).append(
-                stateTd).append(volumeTd).append(ldTd).append(
-                usedVolumeTd).append(usedWeightTd).appendTo("#emps_table tbody");
-        });
-    }
-
-</script>
 </body>
 </html>

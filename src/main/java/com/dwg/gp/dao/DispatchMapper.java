@@ -29,4 +29,10 @@ public interface DispatchMapper {
     int updateByPrimaryKeySelective(Dispatch record);
 
     int updateByPrimaryKey(Dispatch record);
+
+    List<Dispatch> selectDriverDispatch(int id);
+
+    void updateAddendDateByMId(int id);
+
+    void updateStartDate(int id);
 }

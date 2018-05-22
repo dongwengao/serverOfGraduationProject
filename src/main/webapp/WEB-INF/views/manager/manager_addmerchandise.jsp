@@ -198,7 +198,7 @@
 
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="/manager1/getLocationInfo?id=${employee.id}" class="nav-link">
                             <i class="fa fa-home"></i>
                             <p>
                                 工作地点
@@ -451,11 +451,11 @@
             url:"/manager1/updatetheMerchandise",
             data:$.param({'id': merchandiseId,'startpoint':currentPointId}) + '&' + $('#merchandise_form').serialize(),
             success:function (result) {
-                alert("success");
+                alert("生成二维码");
             }
         })
-    });
 
+    });
 
 </script>
 </body>

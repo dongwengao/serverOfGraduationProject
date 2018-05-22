@@ -11,6 +11,16 @@ public class Merchandise {
 
     private Integer endpoint;
 
+    public byte[] getQrimg() {
+        return qrimg;
+    }
+
+    public void setQrimg(byte[] qrimg) {
+        this.qrimg = qrimg;
+    }
+
+    private byte[] qrimg;
+
     public Point getStartpointobject() {
         return startpointobject;
     }
