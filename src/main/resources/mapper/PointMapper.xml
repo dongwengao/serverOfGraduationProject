@@ -93,7 +93,6 @@
     <select id="selectAllPointNeedDispatch" resultMap="BaseResultMap">
     SELECT * FROM POINT
     WHERE EXISTS(SELECT * FROM merchandise WHERE point.`id`=merchandise.`startpoint`)
-    AND TYPE=1
   </select>
 
     <select id="selectPointByManagerId" parameterType="int" resultMap="BaseResultMap">

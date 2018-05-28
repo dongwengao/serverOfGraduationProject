@@ -3,6 +3,7 @@ package com.dwg.gp.controller;
 import com.dwg.gp.bean.*;
 import com.dwg.gp.service.*;
 import com.dwg.gp.utils.Base64ImageUtil;
+import com.dwg.gp.utils.QRCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -111,8 +112,10 @@ public class ManagerController {
     @ResponseBody
     public Msg updateTheMerchandise(HttpServletRequest request,Merchandise merchandise){
         merchandiseService.updateMerchandise(merchandise);
-        //增加一个二维码
-        
+        //add a quick response image
+        int merchandiseId=merchandise.getId();
+        byte[] bytes=QRCodeUtil.getQrcodeImg(merchandiseId+"");
+        merchandiseService.addQRCode(merchandiseId,bytes);
         return Msg.success().add("success","添加成功");
     }
 

@@ -48,4 +48,8 @@ public class MerchandiseService {
     public Merchandise getMerchandiseById(int id) {
         return merchandiseMapper.selectByPrimaryKey(id);
     }
+
+    public void addQRCode(int merchandiseId, byte[] bytes) {
+        merchandiseMapper.updateForQrCode(merchandiseId,bytes);
+    }
 }
