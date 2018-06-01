@@ -81,6 +81,15 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="selectByGoodsName" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from goods
+    where name = #{key,jdbcType=VARCHAR}
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

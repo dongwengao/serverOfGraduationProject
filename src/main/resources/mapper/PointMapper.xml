@@ -95,6 +95,11 @@
     WHERE EXISTS(SELECT * FROM merchandise WHERE point.`id`=merchandise.`startpoint`)
   </select>
 
+    <select id="selectPointByName" resultMap="BaseResultMap">
+        select * from point
+        where name=#{pointStr}
+    </select>
+
     <select id="selectPointByManagerId" parameterType="int" resultMap="BaseResultMap">
     SELECT point.id,point.name,point.type,point.`location`
     FROM POINT,manager,employee

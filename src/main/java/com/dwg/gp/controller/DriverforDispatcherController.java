@@ -68,7 +68,4 @@ public class DriverforDispatcherController {
         return Msg.success().add("drivers",drivers);
     }
 
-
-
-
 }

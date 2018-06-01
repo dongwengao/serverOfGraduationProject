@@ -175,9 +175,9 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/manager1/excel?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>查看历史信息</p>
+                                    <p>EXCEL导入</p>
                                 </a>
                             </li>
                             <li class="nav-item">

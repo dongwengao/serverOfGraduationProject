@@ -16,4 +16,8 @@ public class GoodsService {
     public List<Goods> getGoodsByTypeId(int id){
         return goodsMapper.selectByTypeId(id);
     }
+
+    public int getGoodsByName(String key) {
+        return goodsMapper.selectByGoodsName(key).getId();
+    }
 }

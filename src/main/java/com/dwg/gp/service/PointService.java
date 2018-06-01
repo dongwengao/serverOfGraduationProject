@@ -27,4 +27,8 @@ public class PointService {
     public Point getPointByManagerId(int id) {
         return pointMapper.selectPointByManagerId(id);
     }
+
+    public Point getPointByName(String pointStr) {
+        return pointMapper.selectPointByName(pointStr);
+    }
 }

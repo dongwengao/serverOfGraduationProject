@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -9,6 +8,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/fileinput.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -136,37 +136,17 @@
         <!-- /.sidebar -->
     </aside>
 
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content">
 
-            <table class="table table-hover" id="emps_table">
-                <thead>
 
-
-                <thead>
-                <tbody>
-                <tr>
-                    <th>编号</th>
-                    <th>${point.id}</th>
-                </tr>
-                <tr>
-                    <th>类别</th>
-                    <th><c:if test="${point.type eq '1'}">超市</c:if>
-                        <c:if test="${point.type eq '2'}">仓库</c:if>
-                        <c:if test="${point.type eq '3'}">工厂</c:if>
-                    </th>
-                </tr>
-                <tr>
-                    <th>名称</th>
-                    <th>${point.name}</th>
-                </tr>
-                <tr>
-                    <th>位置</th>
-                    <th>${point.location}</th>
-                </tr>
-                </tbody>
-            </table>
+            <form enctype="multipart/form-data">
+                <div class="file-loading">
+                    <input id="kv-explorer" type="file" multiple name="file">
+                </div>
+            </form>
 
         </section>
     </div>
@@ -199,5 +179,17 @@
 <script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../../dist/js/adminlte.js"></script>
+<script src="/static/fileinput.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#kv-explorer").fileinput({
+            'theme': 'explorer-fa',
+            'uploadUrl': '/manager1/doexcel',
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+        });
+    })
+
+</script>
 </body>
 </html>
