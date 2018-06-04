@@ -5,18 +5,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>连锁超市物流配送管理系统</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/bootstrap.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="modal-body">
-                <form class="form-horizontal" action="/employee/addemployee" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action="${pageContext.request.contextPath}/employee/addemployee" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                             姓名
@@ -119,7 +119,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
-            <img src="../../../dist/img/Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <img src="${pageContext.request.contextPath}/dist/img/Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">超市物流管理</span>
         </a>
@@ -151,7 +151,7 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a class="nav-link">
-                                    <a href="/employee/costardetailinfo1?id=${employee.id}" class="nav-link">
+                                    <a href="${pageContext.request.contextPath}/employee/costardetailinfo1?id=${employee.id}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>查看个人信息</p>
                                     </a>
@@ -177,13 +177,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/employee/getallemployees" class="nav-link">
+                                <a href="${pageContext.request.contextPath}/employee/getallemployees" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>增加员工</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/employee/getallemployees" class="nav-link">
+                                <a href="${pageContext.request.contextPath}/employee/getallemployees" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>开除员工</p>
                                 </a>
@@ -253,7 +253,7 @@
 
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+        <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">dongwengao</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 3.0.0-alpha
@@ -269,15 +269,15 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../../../plugins/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../dist/js/adminlte.js"></script>
+<script src="${pageContext.request.contextPath}/dist/js/adminlte.js"></script>
 
 <script>
 
@@ -288,7 +288,7 @@
 
     function to_page(pn) {
         $.ajax({
-            url: "/employee/emps",
+            url: "${pageContext.request.contextPath}/employee/emps",
             data: "pn=" + pn,
             type: "get",
             success: function (result) {
@@ -322,7 +322,7 @@
 
     $('#emp_add_modal_btn').click(function () {
         $.ajax({
-            url:"/department/list",
+            url:"${pageContext.request.contextPath}/department/list",
             method:"GET",
             success:function (result) {
                 $.each(result.extend.list,function(){
@@ -339,7 +339,7 @@
         var id=$(this).parent("td").parent("tr").find("td:eq(0)").text();
         if(confirm("确认删除"+delName+"?")){
             $.ajax({
-                url:"/employee/delemployee",
+                url:"${pageContext.request.contextPath}/employee/delemployee",
                 data:"id="+id,
                 method:"POST",
                 success:function (result) {

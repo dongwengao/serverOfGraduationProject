@@ -6,7 +6,6 @@ import com.dwg.gp.bean.Msg;
 import com.dwg.gp.service.EmployeeInfoService;
 import com.dwg.gp.service.MerchandiseService;
 import com.dwg.gp.utils.Base64ImageUtil;
-import com.sun.xml.internal.ws.resources.HttpserverMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -5,18 +5,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>连锁超市物流配送管理系统</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/bootstrap.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -84,7 +84,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
-            <img src="../../../dist/img/Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <img src="${pageContext.request.contextPath}/dist/img/Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">超市物流管理</span>
         </a>
@@ -115,7 +115,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/employee/managerdetailinfo1?id=${employee.id}" class="nav-link">
+                                <a href="${pageContext.request.contextPath}/employee/managerdetailinfo1?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>查看个人信息</p>
                                 </a>
@@ -131,7 +131,7 @@
 
 
                     <li class="nav-item">
-                        <a href="/manager1/getLocationInfo?id=${employee.id}" class="nav-link">
+                        <a href="${pageContext.request.contextPath}/manager1/getLocationInfo?id=${employee.id}" class="nav-link">
                             <i class="fa fa-home"></i>
                             <p>
                                 工作地点
@@ -150,19 +150,19 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/manager1/excel?id=${employee.id}" class="nav-link">
+                                <a href="${pageContext.request.contextPath}/manager1/excel?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>EXCEL导入</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/manager1/examInputMerchandise?id=${employee.id}" class="nav-link">
+                                <a href="${pageContext.request.contextPath}/manager1/examInputMerchandise?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>进货任务</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/manager1/addmerchandise?id=${employee.id}" class="nav-link">
+                                <a href="${pageContext.request.contextPath}/manager1/addmerchandise?id=${employee.id}" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>出货任务</p>
                                 </a>
@@ -218,7 +218,7 @@
 
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+        <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">dongwengao</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 3.0.0-alpha
@@ -234,15 +234,15 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../../../plugins/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../dist/js/adminlte.js"></script>
+<script src="${pageContext.request.contextPath}/dist/js/adminlte.js"></script>
 <script>
 
     $(function () {
@@ -252,7 +252,7 @@
     function getinput(){
         $('#merchandise_table tbody').empty();
         $.ajax({
-            url: "/manager1/getallinput",
+            url: "${pageContext.request.contextPath}/manager1/getallinput",
             data: "id=" +${employee.id},
             success: function (result) {
                 $.each(result.extend.merchandises, function () {
@@ -284,7 +284,7 @@
     function getMerchandiseDetail(merchandise){
         $("#pack_table tbody").empty();
         $.ajax({
-            url:"/manager1/getpacksbymid",
+            url:"${pageContext.request.contextPath}/manager1/getpacksbymid",
             data:"mid="+merchandiseId,
             success:function (result) {
                 $('#pack_table tbody').empty();
@@ -309,7 +309,7 @@
     $(document).on('click',".arrivedsure",function(){
         var merchandiseId=$(this).parent("td").parent("tr").find("td:eq(0)").text();
             $.ajax({
-                url:"/manager1/suremerchandise",
+                url:"${pageContext.request.contextPath}/manager1/suremerchandise",
                 data:"id="+merchandiseId,
                 success:function (result) {
                     alert("确认成功");
@@ -323,7 +323,7 @@
     $(document).on('click',".arrivesurepack",function(){
         var packId=$(this).parent("td").parent("tr").find("td:eq(0)").text();
         $.ajax({
-            url:"/manager1/suremerchandisepack",
+            url:"${pageContext.request.contextPath}/manager1/suremerchandisepack",
             data:"id="+packId,
             success:function (result) {
                 alert("确认成功");

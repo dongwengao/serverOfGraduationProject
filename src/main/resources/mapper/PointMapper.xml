@@ -91,7 +91,7 @@
 
 
     <select id="selectAllPointNeedDispatch" resultMap="BaseResultMap">
-    SELECT * FROM POINT
+    SELECT * FROM point
     WHERE EXISTS(SELECT * FROM merchandise WHERE point.`id`=merchandise.`startpoint`)
   </select>
 
@@ -102,7 +102,7 @@
 
     <select id="selectPointByManagerId" parameterType="int" resultMap="BaseResultMap">
     SELECT point.id,point.name,point.type,point.`location`
-    FROM POINT,manager,employee
+    FROM point,manager,employee
     WHERE point.`id`=manager.`point_id`
     AND employee.id=manager.`manager_id`
     AND employee.id=#{id}

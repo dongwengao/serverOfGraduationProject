@@ -41,6 +41,7 @@ public class EmployeeController {
         String name=request.getParameter("username");
         String password=request.getParameter("password");
         employee= loginService.getEmployee(name,password);
+        System.out.println(employee);
         if(employee!=null){
             m.addAttribute("employee",employee);
             img=Base64ImageUtil.byteArr2String(employee.getPhoto());

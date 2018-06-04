@@ -79,11 +79,11 @@
   </sql>
 
   <select id="seleckAllTruck" resultMap="BaseResultMap">
-        SELECT * FROM truck,POINT WHERE truck.last_distribution_point=point.id
+        SELECT * FROM truck,point WHERE truck.last_distribution_point=point.id
   </select>
 
   <select id="selectUseTruck" resultMap="BaseResultMap">
-        SELECT * FROM truck,POINT WHERE truck.last_distribution_point=point.id and truck.state=1
+        SELECT * FROM truck,point WHERE truck.last_distribution_point=point.id and truck.state=1
   </select>
 
   <select id="seleckAllTruckByPid" parameterType="int" resultMap="BaseResultMap">

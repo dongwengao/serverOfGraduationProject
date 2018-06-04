@@ -135,7 +135,7 @@
     SELECT
     employee.id,department, employee.name, PASSWORD, gender, phone, employee.state, privilege , photo,collection_num,deliver.state dstate,last_distribution_point,
     deliver.location,point.name pname
-    FROM employee JOIN deliver ON employee.id=deliver_id JOIN POINT ON deliver.last_distribution_point = point.id
+    FROM employee JOIN deliver ON employee.id=deliver_id JOIN point ON deliver.last_distribution_point = point.id
     WHERE employee.id =#{id}
   </select>
 
@@ -143,7 +143,7 @@
     SELECT
     employee.id,department, employee.name, PASSWORD, gender, phone, employee.state , privilege , photo,collection_num,deliver.state dstate,last_distribution_point,
     deliver.location ,point.name pname
-   FROM deliver LEFT JOIN employee ON deliver.`deliver_id`=employee.`id` JOIN POINT ON deliver.`last_distribution_point`=point.`id`
+   FROM deliver LEFT JOIN employee ON deliver.`deliver_id`=employee.`id` JOIN point ON deliver.`last_distribution_point`=point.`id`
     </select>
 
     <select id="selectAllDriverByPid" parameterType="int" resultMap="ResultMapWithBLOBsWithWork">
@@ -157,7 +157,7 @@
     <select id="selectByManagerPrimaryKey" resultMap="ResultMapWithBLOBsWithWork">
     SELECT
     employee.id,department,employee.name,PASSWORD,gender,phone,employee.state,privilege,photo,point.id,point.name mpname
-    FROM employee JOIN manager ON employee.id=manager.manager_id JOIN POINT ON manager.point_id=point.id AND employee.id=#{id}
+    FROM employee JOIN manager ON employee.id=manager.manager_id JOIN point ON manager.point_id=point.id AND employee.id=#{id}
     </select>
 
 
@@ -178,7 +178,7 @@
     SELECT
     employee.id,department, employee.name, PASSWORD, gender, phone, employee.state , privilege , photo,collection_num,deliver.state dstate,last_distribution_point,
     deliver.location ,point.name pname
-   FROM deliver LEFT JOIN employee ON deliver.`deliver_id`=employee.`id` JOIN POINT ON deliver.`last_distribution_point`=point.`id`
+   FROM deliver LEFT JOIN employee ON deliver.`deliver_id`=employee.`id` JOIN point ON deliver.`last_distribution_point`=point.`id`
    AND deliver.`state`=2
     </select>
 
