@@ -1,11 +1,7 @@
 package com.dwg.gp.controller;
 
 import com.dwg.gp.bean.*;
-import com.dwg.gp.dao.MerchandiseMapper;
-import com.dwg.gp.service.DispatchService;
-import com.dwg.gp.service.EmployeeInfoService;
-import com.dwg.gp.service.MerchandiseService;
-import com.dwg.gp.service.PointService;
+import com.dwg.gp.service.*;
 import com.dwg.gp.utils.Base64ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +29,9 @@ public class DriverController {
     @Autowired
     PointService pointService;
 
+    @Autowired
+    DeliverService deliverService;
+
     @RequestMapping("/getallmissions")
     public String GetAllMissions(HttpServletRequest request, @RequestParam("id")int id,Model model) throws Exception {
         Employee employee=employeeInfoService.getEmployeeForDriver(id);
@@ -41,6 +40,13 @@ public class DriverController {
         return "driver/driver_getallmissions";
     }
 
+    @RequestMapping("/getalter")
+    public String GetAlter(HttpServletRequest request,@RequestParam("id")int id,Model model) throws Exception {
+        Employee employee=employeeInfoService.getEmployeeForDriver(id);
+        model.addAttribute("employee",employee);
+        model.addAttribute("img",Base64ImageUtil.byteArr2String(employee.getPhoto()));
+        return "driver/driver_getalter";
+    }
 
     @RequestMapping("/manipulatedispatch")
     public String ManipulateDispatch(HttpServletRequest request,@RequestParam("id") int id,Model model) throws Exception {
@@ -51,8 +57,9 @@ public class DriverController {
     }
 
     @RequestMapping("/showroute")
-    public String ShowRoute(HttpServletRequest request,@RequestParam("id") int id,Model model){
-
+    public String ShowRoute(HttpServletRequest request,@RequestParam("id") int id,Model model,@RequestParam("deliverid") int did){
+        //更新司机转台为1
+        deliverService.updateDeliverForStarted(did);
         //update dispatch start_date
         dispatchService.markStartDate(id);
         Dispatch dispatch=dispatchService.getDispatchByDId(id);

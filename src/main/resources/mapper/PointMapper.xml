@@ -91,9 +91,9 @@
 
 
     <select id="selectAllPointNeedDispatch" resultMap="BaseResultMap">
-    SELECT * FROM point
-    WHERE EXISTS(SELECT * FROM merchandise WHERE point.`id`=merchandise.`startpoint`)
-  </select>
+       SELECT * FROM point
+       WHERE EXISTS(SELECT * FROM merchandise WHERE point.`id`=merchandise.`startpoint` AND merchandise.state=1)
+    </select>
 
     <select id="selectPointByName" resultMap="BaseResultMap">
         select * from point

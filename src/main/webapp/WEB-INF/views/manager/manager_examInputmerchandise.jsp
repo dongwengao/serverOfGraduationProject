@@ -260,7 +260,7 @@
                     var weightTd = $("<td></td>").append(this.weight);
                     var volumnTd = $("<td></td>").append(this.volumn);
                     var startTd = $("<td></td>").append(this.startpointobject.name);
-                    var startType = $("<td></td>").append(this.startpoint.type == '1' ? '超市' : this.startpoint.type == '2' ? '仓库' : '工厂');
+                    var startType = $("<td></td>").append(this.startpointobject.type == '1'?'超市':this.startpointobject.type=='2'?'仓库':'工厂');
                     var editBtn = $("<button></button>").addClass(
                         "btn btn-primary btn-sm showdetail").append("详情");
                     var delBtn = $("<button></button>").addClass(

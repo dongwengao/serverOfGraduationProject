@@ -45,4 +45,6 @@ public interface MerchandiseMapper {
     void updateDispatchedState(int id);
 
     void updateForQrCode(int merchandiseId, byte[] bytes);
+
+    void updateByMerchandiseIdForDeliver(int id);
 }

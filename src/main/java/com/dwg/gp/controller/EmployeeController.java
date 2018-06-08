@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -40,31 +41,28 @@ public class EmployeeController {
     public String login(HttpServletRequest request, HttpServletResponse response,Model m) throws Exception {
         String name=request.getParameter("username");
         String password=request.getParameter("password");
+
+        HttpSession session = request.getSession(false);
+        session.setAttribute("SESSION_USERNAME", name);
+
         employee= loginService.getEmployee(name,password);
-        System.out.println(employee);
         if(employee!=null){
             m.addAttribute("employee",employee);
             img=Base64ImageUtil.byteArr2String(employee.getPhoto());
             m.addAttribute("img",img);
+            if(employee.getDepartment()==1){
+                return "boss/boss_index";
+            }else if(employee.getDepartment()==2){
+                return "driver/driver_index";
+            }else if(employee.getDepartment()==3){
+                return "manager/manager_index";
+            }else if(employee.getDepartment()==4){
+                return "dispatcher/dispatcher_index";
+            }
         }
-        if(employee.getDepartment()==1){
-            return "boss/boss_index";
-        }else if(employee.getDepartment()==2){
-            return "driver/driver_index";
-        }else if(employee.getDepartment()==3){
-            return "manager/manager_index";
-        }else if(employee.getDepartment()==4){
-            return "dispatcher/dispatcher_index";
-        }
-        return null;
+        return "relogin";
     }
 
-//    @RequestMapping(value = "/driverdetailinfo")
-//    @ResponseBody
-//    public Employee getDetailInfo(@RequestParam(name="id")int id, Model model, HttpServletResponse response){
-//        employee= employeeInfoService.getEmployeeForDriver(id);
-//        return employee;
-//    }
 
     @RequestMapping(value="/driverdetailinfo1")
     public String getDriverDetailInfo(@RequestParam(name="id")int id, Model model) throws Exception {

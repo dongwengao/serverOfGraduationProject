@@ -1,5 +1,6 @@
 package com.dwg.gp.service;
 
+import com.dwg.gp.bean.Deliver;
 import com.dwg.gp.dao.DeliverMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,7 @@ public class DeliverService {
         deliverMapper.updateDeliverStateForDispatched(id);
     }
 
+    public void updateDeliverForStarted(int id) {
+        deliverMapper.updateDeliverStateForStarted(id);
+    }
 }

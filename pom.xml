@@ -180,18 +180,6 @@
         </dependency>
 
 
-        <!-- WebSocket -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-websocket</artifactId>
-            <version>4.0.2.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-messaging</artifactId>
-            <version>4.0.2.RELEASE</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/log4j/log4j -->
         <dependency>
@@ -206,6 +194,26 @@
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>4.3.10.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>4.3.10.RELEASE</version>
+        </dependency>
+
+
 
     </dependencies>
 </project>

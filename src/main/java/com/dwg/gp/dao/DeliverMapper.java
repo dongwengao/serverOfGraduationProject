@@ -21,4 +21,6 @@ public interface DeliverMapper {
     int updateByExample(@Param("record") Deliver record, @Param("example") DeliverExample example);
 
     void updateDeliverStateForDispatched(int id);
+
+    void updateDeliverStateForStarted(int id);
 }

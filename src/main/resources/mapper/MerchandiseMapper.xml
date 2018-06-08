@@ -152,13 +152,14 @@
     </delete>
 
 
-    <insert id="insertForId" parameterType="com.dwg.gp.bean.Merchandise" keyProperty="id" useGeneratedKeys="true" keyColumn="id">
+    <insert id="insertForId" parameterType="com.dwg.gp.bean.Merchandise" keyProperty="id" useGeneratedKeys="true"
+            keyColumn="id">
         <selectKey resultType="int" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
-            INSERT INTO merchandise
-            (volumn,weight,STARTPOINT,ENDPOINT,state)
-              VALUES(NULL,NULL,NULL,NULL,1)
+        INSERT INTO merchandise
+        (volumn,weight,STARTPOINT,ENDPOINT,state)
+        VALUES(NULL,NULL,NULL,NULL,1)
     </insert>
 
     <insert id="insert" parameterType="com.dwg.gp.bean.Merchandise">
@@ -310,4 +311,9 @@
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <update id="updateByMerchandiseIdForDeliver" parameterType="int">
+       UPDATE deliver SET deliver.`state`=2
+       WHERE deliver.`deliver_id` = (SELECT dispatch.`deliver_id` FROM dispatch WHERE dispatch.`merchandise_id`=#{id})
+    </update>
 </mapper>

@@ -1,24 +1,30 @@
 package com.dwg.gp.controller;
 
 import com.dwg.gp.bean.*;
+import com.dwg.gp.dao.DeliverMapper;
 import com.dwg.gp.service.*;
 import com.dwg.gp.utils.Base64ImageUtil;
+import com.dwg.gp.utils.SpringWebSocketHandler;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.socket.TextMessage;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 @Controller
 @RequestMapping("/dispatch")
-public class DispatcherController {
+public class DispatcherController  implements ApplicationContextAware {
 
 
     @Autowired
@@ -38,6 +44,7 @@ public class DispatcherController {
 
     @Autowired
     TruckService truckService;
+
 
     @RequestMapping("/makedispatcher")
     public String MakeDispatcher(HttpServletRequest request, @RequestParam("id") int id,Model model) throws Exception {
@@ -80,6 +87,13 @@ public class DispatcherController {
         String merchandiseId=requeset.getParameter("merchandiseId");
         String truckId=requeset.getParameter("truckId");
         String deliverId=requeset.getParameter("deliverId");
+
+
+        Employee employee=employeeInfoService.getEmployeeForDriver(Integer.parseInt(deliverId));
+
+        SpringWebSocketHandler socketHandler=(SpringWebSocketHandler) context.getBean("myHandler");
+        socketHandler.sendMessageToUser(employee.getName(),new TextMessage("您被调度员调用，请查看任务"));
+
         String endDateShould=requeset.getParameter("endDateShould");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date endshould=sdf.parse(endDateShould);
@@ -102,4 +116,10 @@ public class DispatcherController {
         return null;
     }
 
+    private WebApplicationContext context;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        context=(WebApplicationContext) applicationContext;
+    }
 }

@@ -88,10 +88,10 @@
 
         	
         	<li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="${pageContext.request.contextPath}/driver/getalter?id=${employee.id}" class="nav-link">
               <i class="fa fa-circle-o nav-icon"></i>
               <p>
-                	工作状态
+                	获得通知
               </p>
             </a>
           </li>

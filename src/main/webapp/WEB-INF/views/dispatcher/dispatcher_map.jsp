@@ -339,8 +339,13 @@
                 break;
             }
         }
-        var strs = points[s].location.split(',');
-        map.centerAndZoom(new BMap.Point(strs[0], strs[1]), 15);  // 初始化地图,设置中心点坐标和地图级别
+        if(points.length>0){
+            var strs = points[s].location.split(',');
+            map.centerAndZoom(new BMap.Point(strs[0], strs[1]), 15);  // 初始化地图,设置中心点坐标和地图级别
+        }
+       else {
+            map.centerAndZoom(new BMap.Point('120.278804','31.50279'),15);
+        }
         //set marker
         for (i = 1; i <= points.length; i++) {
             if (points[i] != null) {

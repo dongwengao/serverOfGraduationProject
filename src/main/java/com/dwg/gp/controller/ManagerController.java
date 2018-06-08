@@ -88,6 +88,8 @@ public class ManagerController {
     @RequestMapping("/suremerchandise")
     @ResponseBody
     public Msg sureMerchandise(@RequestParam("id") int id, HttpServletRequest request, Model model) throws Exception {
+       //更新货车司机信息
+        merchandiseService.sureDeliverByMerchandiseId(id);
         merchandiseService.sureArrive(id);
         dispatchService.sureDispatchArrived(id);
         return Msg.success().add("success", "success");

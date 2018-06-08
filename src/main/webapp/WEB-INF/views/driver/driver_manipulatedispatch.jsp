@@ -167,10 +167,10 @@
 
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="${pageContext.request.contextPath}/driver/getalter?id=${employee.id}" class="nav-link">
                             <i class="fa fa-circle-o nav-icon"></i>
                             <p>
-                                工作状态
+                                获得通知
                             </p>
                         </a>
                     </li>
@@ -286,7 +286,7 @@
                     var idTd=$("<td></td>").append(item.id);
                     var truckTd = $("<td></td>").append(item.truckObject.plateNum);
                     var endTd=$("<td></td>").append(item.endDateShould);
-                    var manipuateTd=$("<a></a>").attr("href","${pageContext.request.contextPath}/driver/showroute?id="+item.id).append($("<button></button>").addClass(
+                    var manipuateTd=$("<a></a>").attr("href","${pageContext.request.contextPath}/driver/showroute?id="+item.id+"&deliverid=${employee.id}").append($("<button></button>").addClass(
                         "btn btn-danger btn-sm delete_btn startmission").append(
                         $("<span></span>").addClass(
                             "glyphicon glyphicon-remove")).append("开始任务"));

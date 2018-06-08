@@ -138,6 +138,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update deliver
     <set>
@@ -176,6 +177,12 @@
   <update id="updateDeliverStateForDispatched" parameterType="int">
     update deliver
     set deliver.state=3
+    where deliver.deliver_id=#{id}
+  </update>
+
+  <update id="updateDeliverStateForStarted" parameterType="int">
+    update deliver
+    set deliver.state=1
     where deliver.deliver_id=#{id}
   </update>
 

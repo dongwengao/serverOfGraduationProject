@@ -52,4 +52,8 @@ public class MerchandiseService {
     public void addQRCode(int merchandiseId, byte[] bytes) {
         merchandiseMapper.updateForQrCode(merchandiseId,bytes);
     }
+
+    public void sureDeliverByMerchandiseId(int id) {
+        merchandiseMapper.updateByMerchandiseIdForDeliver(id);
+    }
 }
